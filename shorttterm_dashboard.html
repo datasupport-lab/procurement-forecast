@@ -397,6 +397,7 @@ tbody td { padding: 10px 24px; font-size: 12px; }
             <div class="chart-title">CPO Price Projection (MYR/MT)</div>
             <div class="chart-sub" id="chart-sub">Baseline vs. Intervention Scenario</div>
           </div>
+          
           <div class="chart-legend">
             <div class="leg">
               <div class="l-line" style="background:var(--muted);border-top:2px dashed var(--muted);height:0"></div>
@@ -414,9 +415,13 @@ tbody td { padding: 10px 24px; font-size: 12px; }
               <div class="l-swatch" style="background:var(--red-fill);border:1px solid var(--red)"></div>
               Bearish Impact
             </div>
+          </div> <div class="ev-field" style="margin-left: auto;">
+            <div class="ev-segmented" style="width: 200px;">
+              <button class="seg-btn active" id="btn-view-price" onclick="toggleChartView('price')">Price View</button>
+              <button class="seg-btn" id="btn-view-percentile" onclick="toggleChartView('percentile')">Percentile View</button>
+            </div>
           </div>
-        </div>
-        <div class="chart-wrap" id="chart-wrap">
+          </div> <div class="chart-wrap" id="chart-wrap">
           <canvas id="cv"></canvas>
           <svg class="ev-overlay" id="ev-overlay"></svg>
           <div class="tooltip" id="tooltip"></div>
@@ -987,6 +992,162 @@ function boot() {
 
 document.addEventListener('DOMContentLoaded', loadData);
 window.addEventListener('visibilitychange', () => { if (!document.hidden) drawChart(); });
+</script>
+<script>
+// ─────────────────────────────────────────────
+//  EXTENSION: PERCENTILE VIEW MODULE (FIXED)
+// ─────────────────────────────────────────────
+
+// Global state untuk mode view
+let chartViewMode = 'price';
+
+// Toggle Functionality
+function toggleChartView(mode) {
+  chartViewMode = mode;
+  document.getElementById('btn-view-price').classList.toggle('active', mode === 'price');
+  document.getElementById('btn-view-percentile').classList.toggle('active', mode === 'percentile');
+  
+  // Trigger redraw menggunakan fungsi drawChart bawaan
+  if (typeof drawChart === 'function') {
+    drawChart();
+  }
+}
+
+// Math Utility: Menghitung Percentile secara dinamis
+function getPercentile(arr, p) {
+  if (!arr || arr.length === 0) return 0;
+  const sorted = [...arr].sort((a, b) => a - b);
+  const pos = (sorted.length - 1) * (p / 100);
+  const base = Math.floor(pos);
+  const rest = pos - base;
+  if (sorted[base + 1] !== undefined) {
+    return sorted[base] + rest * (sorted[base + 1] - sorted[base]);
+  }
+  return sorted[base];
+}
+
+// ─────────────────────────────────────────────
+//  PROXY OVERRIDES (Non-Destructive Hooks)
+// ─────────────────────────────────────────────
+
+// 1. Hook ke drawChart agar tidak merusak fungsi asli
+const _originalDrawChart = drawChart;
+drawChart = function() {
+  // Jalankan render chart asli terlebih dahulu
+  _originalDrawChart();
+
+  // Jika mode percentile aktif, dan Canvas Data (_d) sudah terbentuk, gambar overlay
+  if (chartViewMode === 'percentile' && typeof CV !== 'undefined' && CV._d) {
+    renderPercentileOverlay();
+  }
+};
+
+// 2. Hook ke onHover untuk menambahkan data Percentile Rank ke Tooltip asli
+const _originalOnHover = onHover;
+onHover = function(e) {
+  // Jalankan hover asli terlebih dahulu
+  _originalOnHover(e);
+
+  const tt = document.getElementById('tooltip');
+  if (tt.style.opacity !== '0' && chartViewMode === 'percentile') {
+    const r = CV.getBoundingClientRect();
+    const mx = (e.clientX - r.left) * (CV.width / r.width);
+    const { d, tx } = CV._d;
+    
+    let ni = 0, minD = Infinity;
+    for (let i = 0; i < d.length; i++) {
+      const dist = Math.abs(mx - tx(i));
+      if (dist < minD) { minD = dist; ni = i; }
+    }
+    
+    const row = d[ni];
+    // Kumpulkan semua harga yang terlihat di layar untuk menghitung ranking aktual
+    const allVisiblePrices = VIS_DATA.flatMap(v => [v.baseline_myr, v.interv_myr]);
+    const rank = (allVisiblePrices.filter(p => p <= row.interv_myr).length / allVisiblePrices.length) * 100;
+    
+    // Tambahkan baris baru di tooltip secara mulus
+    tt.innerHTML += `
+      <div class="tt-sep"></div>
+      <div class="tt-row">
+        <span class="tt-lbl">Current Zone Rank</span>
+        <span class="tt-val" style="color:var(--amber)">P${Math.round(rank)}</span>
+      </div>`;
+  }
+};
+
+// ─────────────────────────────────────────────
+//  CANVAS RENDERER (SHADES & LINES)
+// ─────────────────────────────────────────────
+function renderPercentileOverlay() {
+  const cx = CX; // Menggunakan Context (CX) bawaan dari script asli
+  const { ty } = CV._d; // Menggunakan fungsi mapping Y-Axis bawaan asli
+  
+  // Dimensi padding sama dengan konstanta 'P' di script asli (l:82, r:24)
+  const paddingL = 82;
+  const paddingR = 24;
+  const w = CV.width - paddingL - paddingR;
+  const xStart = paddingL;
+  const xEnd = CV.width - paddingR;
+
+  // Tarik data harga yang sedang tampil di layar saat ini (sesuai efek zoom)
+  const activePrices = VIS_DATA.flatMap(d => [d.baseline_myr, d.interv_myr]);
+  
+  const p10 = getPercentile(activePrices, 10);
+  const p25 = getPercentile(activePrices, 25);
+  const p50 = getPercentile(activePrices, 50);
+  const p75 = getPercentile(activePrices, 75);
+  const p90 = getPercentile(activePrices, 90);
+
+  // Helper untuk menggambar area arsiran transparan (Zone)
+  function drawZone(valTop, valBot, color, label) {
+    const yTop = ty(valTop);
+    const yBot = ty(valBot);
+    
+    cx.fillStyle = color;
+    cx.fillRect(xStart, yTop, w, yBot - yTop);
+
+    // Label Zone diletakkan di sisi kanan
+    cx.fillStyle = '#1E293B';
+    cx.font = '600 10px "Inter"';
+    cx.textAlign = 'right';
+    cx.fillText(label, xEnd - 10, yTop + 14);
+  }
+
+  // 1. Gambar Area Background (Zones)
+  drawZone(p90, p75, 'rgba(239, 68, 68, 0.08)', 'Extreme High (P75-P90)');
+  drawZone(p75, p50, 'rgba(255, 235, 59, 0.08)', 'High Band (P75-P90)');
+  drawZone(p50, p25, 'rgba(16, 185, 129, 0.08)', 'Normal Band (P25-P75)');
+  drawZone(p25, p10, 'rgba(59, 130, 246, 0.08)', 'Low Price Zone (P10-P25)');
+
+  // 2. Gambar Garis Percentile (Lines)
+  const lines = [
+    { p: p90, lbl: 'P90' },
+    { p: p75, lbl: 'P75' },
+    { p: p50, lbl: 'P50 (Median)' },
+    { p: p25, lbl: 'P25' },
+    { p: p10, lbl: 'P10' }
+  ];
+
+  lines.forEach(pt => {
+    const y = ty(pt.p);
+    
+    // Garis putus-putus
+    cx.strokeStyle = '#94A3B8';
+    cx.setLineDash([4, 4]);
+    cx.lineWidth = 1;
+    cx.beginPath(); 
+    cx.moveTo(xStart, y); 
+    cx.lineTo(xEnd, y); 
+    cx.stroke();
+    cx.setLineDash([]);
+
+    // Label Garis diletakkan di sisi kiri
+    cx.fillStyle = '#475569';
+    cx.font = '700 10px "DM Mono"';
+    cx.textAlign = 'left';
+    cx.fillText(`${pt.lbl}: ${Math.round(pt.p).toLocaleString('id-ID')}`, xStart + 8, y - 6);
+  });
+}
 </script>
 </body>
 </html>
