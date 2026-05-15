@@ -7,51 +7,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════
-   DESIGN TOKENS (LIGHT THEME MATCHING IMAGE)
+   DESIGN TOKENS (SMOOTH UI)
 ═══════════════════════════════════════════════ */
 :root {
-  /* Layout Colors */
-  --bg:        #F4F7F9; /* App background */
-  --srf:       #FFFFFF; /* Card background */
-  --srf-2:     #F8FAFC; /* Secondary surface */
-  --srf-3:     #F1F5F9; /* Tertiary / Inputs */
-  
-  /* Header specifically */
+  --bg:        #F8FAFC; 
+  --srf:       #FFFFFF; 
+  --srf-2:     #F1F5F9; 
+  --srf-3:     #E2E8F0; 
   --header-bg: #1E2B3C;
   --header-text: #FFFFFF;
-
-  /* Borders */
   --bdr:       #E2E8F0;
   --bdr-lt:    #CBD5E1;
-
-  /* Typography */
-  --text-main: #1E293B;
+  --text-main: #0F172A;
   --muted:     #64748B;
   --subtle:    #94A3B8;
-
-  /* Semantic Colors */
   --blue:      #3B82F6;
   --blue-dim:  rgba(59, 130, 246, 0.1);
   --cyan:      #0EA5E9; 
-  --cyan-dim:  rgba(14, 165, 233, 0.1);
-  
   --green:     #10B981;
   --green-dim: rgba(16, 185, 129, 0.1);
   --green-fill:rgba(16, 185, 129, 0.15);
-  
   --red:       #EF4444;
   --red-dim:   rgba(239, 68, 68, 0.1);
   --red-fill:  rgba(239, 68, 68, 0.15);
-
   --amber:     #F59E0B;
-  --amber-dim: rgba(245, 158, 11, 0.1);
-
-  /* Fonts */
   --sans: 'Inter', sans-serif;
   --mono: 'DM Mono', monospace;
-
-  /* Radii */
-  --r4: 4px; --r6: 6px; --r8: 8px; --r12: 12px;
+  --r6: 6px; --r8: 8px; --r12: 12px; --r16: 16px;
 }
 
 /* ═══════════════════════════════════════════════
@@ -59,14 +41,7 @@
 ═══════════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body {
-  font-family: var(--sans);
-  background: var(--bg);
-  color: var(--text-main);
-  font-size: 13px;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+body { font-family: var(--sans); background: var(--bg); color: var(--text-main); font-size: 13px; min-height: 100vh; overflow-x: hidden; }
 button { cursor: pointer; border: none; background: none; font-family: var(--sans); }
 input, select { font-family: var(--sans); }
 ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -77,112 +52,92 @@ input, select { font-family: var(--sans); }
    HEADER
 ═══════════════════════════════════════════════ */
 header {
-  background: var(--header-bg);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  height: 56px;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 24px; position: sticky; top: 0; z-index: 200;
+  background: var(--header-bg); border-bottom: 1px solid rgba(255,255,255,0.1); height: 60px;
+  display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: sticky; top: 0; z-index: 200;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
-.h-logo { display: flex; align-items: center; gap: 12px; }
+.h-logo { display: flex; align-items: center; gap: 14px; }
 .h-mark {
-  width: 34px; height: 34px; border-radius: var(--r6);
-  background: rgba(255,255,255,0.1);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 800; color: var(--header-text);
+  width: 36px; height: 36px; border-radius: var(--r8); background: rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: var(--header-text);
   letter-spacing: -0.02em; border: 1px solid rgba(255,255,255,0.2);
 }
-.h-title { font-size: 15px; font-weight: 700; color: var(--header-text); letter-spacing: -0.01em; }
-.h-sub { font-size: 11px; color: #94A3B8; margin-top: 2px; font-weight: 400; }
+.h-title { font-size: 16px; font-weight: 700; color: var(--header-text); letter-spacing: -0.01em; }
+.h-sub { font-size: 12px; color: #94A3B8; margin-top: 2px; font-weight: 400; }
 .h-status { display: flex; align-items: center; gap: 8px; }
-.h-pill {
-  font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.2); color: #CBD5E1; font-family: var(--mono);
-}
+.h-pill { font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); color: #CBD5E1; font-family: var(--mono); }
 .h-pill.live { border-color: var(--cyan); color: #38BDF8; background: rgba(14,165,233,0.2); }
 
 /* ═══════════════════════════════════════════════
    LAYOUT GRID & SIDEBAR
 ═══════════════════════════════════════════════ */
-.app { display: grid; grid-template-columns: 300px 1fr; min-height: calc(100vh - 56px); }
-.sidebar { background: var(--srf); border-right: 1px solid var(--bdr); height: calc(100vh - 56px); position: sticky; top: 56px; display: flex; flex-direction: column; overflow: hidden; }
-.sb-section { padding: 18px 20px; border-bottom: 1px solid var(--bdr); flex-shrink: 0; }
-.sb-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 12px; }
-.sb-scroll { flex: 1; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 14px; }
+.app { display: grid; grid-template-columns: 320px 1fr; min-height: calc(100vh - 60px); }
+.sidebar { background: var(--srf); border-right: 1px solid var(--bdr); height: calc(100vh - 60px); position: sticky; top: 60px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 1px 0 10px rgba(0,0,0,0.02); }
+.sb-section { padding: 20px 24px; border-bottom: 1px solid var(--bdr); flex-shrink: 0; }
+.sb-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 14px; }
+.sb-scroll { flex: 1; overflow-y: auto; padding: 20px 24px; display: flex; flex-direction: column; gap: 16px; }
 
-/* Term & Period Controls */
-.term-toggle { display: flex; background: var(--srf-3); padding: 4px; border-radius: var(--r8); margin-bottom: 12px; border: 1px solid var(--bdr); }
-.term-btn { flex: 1; padding: 6px 0; font-size: 11px; font-weight: 600; color: var(--muted); border-radius: var(--r6); transition: all 0.2s; }
-.term-btn.active { background: var(--srf); color: var(--blue); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+.hz-btn { padding: 10px 0; border-radius: var(--r6); border: 1px solid var(--bdr); background: var(--srf); color: var(--muted); font-family: var(--mono); font-size: 12px; font-weight: 600; transition: all .2s; }
+.hz-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--srf-2); }
+.hz-btn.active { background: var(--blue); border-color: var(--blue); color: #FFF; font-weight: 700; box-shadow: 0 2px 4px var(--blue-dim); }
+.period-grid-hist { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; } 
 
-.period-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-.p-btn { padding: 8px 0; border-radius: var(--r6); border: 1px solid var(--bdr); background: var(--srf); color: var(--muted); font-family: var(--mono); font-size: 11px; font-weight: 500; transition: all .15s; }
-.p-btn:hover { border-color: var(--blue); color: var(--blue); }
-.p-btn.active { background: var(--blue-dim); border-color: var(--blue); color: var(--blue); font-weight: 700; }
-
-/* Stats */
-.stat-grid { display: flex; flex-direction: column; gap: 4px; }
-.stat-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: var(--r6); background: var(--srf-2); border: 1px solid transparent; }
-.stat-lbl { font-size: 11px; font-weight: 500; color: var(--muted); }
-.stat-val { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--text-main); }
+.stat-grid { display: flex; flex-direction: column; gap: 6px; }
+.stat-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-radius: var(--r8); background: var(--srf-2); border: 1px solid transparent; transition: background 0.2s; }
+.stat-row:hover { background: var(--srf-3); }
+.stat-lbl { font-size: 12px; font-weight: 500; color: var(--muted); }
+.stat-val { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--text-main); }
 .stat-val.up { color: var(--green); }
 .stat-val.dn { color: var(--red); }
 .stat-val.cy { color: var(--blue); }
 
 /* ═══════════════════════════════════════════════
-   EVENT CARDS (LIGHT THEME)
+   EVENT CARDS
 ═══════════════════════════════════════════════ */
-.event-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.btn-add-event { display: flex; align-items: center; gap: 5px; padding: 6px 14px; border-radius: var(--r6); border: 1px dashed var(--bdr-lt); color: var(--blue); font-size: 11px; font-weight: 600; transition: all .15s; background: var(--srf); }
+.event-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.btn-add-event { display: flex; align-items: center; gap: 5px; padding: 6px 14px; border-radius: var(--r6); border: 1px dashed var(--bdr-lt); color: var(--blue); font-size: 12px; font-weight: 600; transition: all .2s; background: var(--srf); }
 .btn-add-event:hover { border-color: var(--blue); background: var(--blue-dim); }
-.event-list { display: flex; flex-direction: column; gap: 10px; }
-.ev-card { border-radius: var(--r8); border: 1px solid var(--bdr); background: var(--srf); overflow: hidden; transition: all .2s; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
-.ev-card:hover { border-color: var(--bdr-lt); box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
-.ev-card.open { border-color: var(--blue); }
+.event-list { display: flex; flex-direction: column; gap: 12px; }
+.ev-card { border-radius: var(--r8); border: 1px solid var(--bdr); background: var(--srf); overflow: hidden; transition: all .2s; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+.ev-card:hover { border-color: var(--bdr-lt); box-shadow: 0 4px 8px rgba(0,0,0,0.04); }
+.ev-card.open { border-color: var(--blue); box-shadow: 0 4px 12px var(--blue-dim); }
 .ev-card.supply { border-left: 4px solid var(--red); }
 .ev-card.demand { border-left: 4px solid var(--blue); }
-.ev-card-head { display: flex; align-items: center; gap: 10px; padding: 12px; cursor: pointer; user-select: none; background: var(--srf-2); }
+.ev-card-head { display: flex; align-items: center; gap: 10px; padding: 14px; cursor: pointer; user-select: none; background: var(--srf-2); transition: background 0.2s; }
+.ev-card-head:hover { background: var(--srf-3); }
 .ev-card.open .ev-card-head { background: var(--srf); border-bottom: 1px solid var(--bdr); }
 .ev-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 .ev-supply .ev-dot { background: var(--red); }
 .ev-demand .ev-dot { background: var(--blue); }
-.ev-name { flex: 1; font-size: 12px; font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ev-type-badge { font-size: 9px; font-weight: 700; padding: 3px 6px; border-radius: 4px; text-transform: uppercase; }
+.ev-name { flex: 1; font-size: 13px; font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ev-type-badge { font-size: 9px; font-weight: 800; padding: 4px 6px; border-radius: 4px; text-transform: uppercase; }
 .ev-supply .ev-type-badge { background: var(--red-dim); color: var(--red); }
 .ev-demand .ev-type-badge { background: var(--blue-dim); color: var(--blue); }
-.ev-toggle { color: var(--muted); font-size: 12px; transition: transform .2s; }
+.ev-toggle { color: var(--muted); font-size: 14px; transition: transform .3s; }
 .ev-card.open .ev-toggle { transform: rotate(180deg); }
-.ev-body { display: none; padding: 14px; flex-direction: column; gap: 12px; }
+.ev-body { display: none; padding: 16px; flex-direction: column; gap: 14px; }
 .ev-card.open .ev-body { display: flex; }
-
-/* Metrics in card */
-.ev-metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-.ev-metric { background: var(--srf-2); border: 1px solid var(--bdr); border-radius: var(--r6); padding: 8px; text-align: center; }
-.ev-metric-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
-.ev-metric-val { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--text-main); }
-
-/* Inputs in card */
-.ev-field { display: flex; flex-direction: column; gap: 6px; }
-.ev-field-label { font-size: 10px; font-weight: 600; color: var(--muted); }
-.ev-input { width: 100%; padding: 8px 12px; background: var(--srf); border: 1px solid var(--bdr); border-radius: var(--r6); color: var(--text-main); font-size: 12px; font-family: var(--sans); font-weight: 500; outline: none; transition: all .15s; }
-.ev-input:focus { border-color: var(--blue); box-shadow: 0 0 0 2px var(--blue-dim); }
+.ev-metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.ev-metric { background: var(--srf-2); border: 1px solid var(--bdr); border-radius: var(--r6); padding: 10px; text-align: center; }
+.ev-metric-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+.ev-metric-val { font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--text-main); }
+.ev-field { display: flex; flex-direction: column; gap: 8px; }
+.ev-field-label { font-size: 11px; font-weight: 600; color: var(--muted); }
+.ev-input { width: 100%; padding: 10px 12px; background: var(--srf); border: 1px solid var(--bdr); border-radius: var(--r6); color: var(--text-main); font-size: 13px; font-family: var(--sans); font-weight: 500; outline: none; transition: all .2s; }
+.ev-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-dim); }
 .ev-slider-meta { display: flex; justify-content: space-between; align-items: center; }
 .ev-slider-val { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--blue); }
-
-/* Range Sliders Light Theme */
 input[type=range] { -webkit-appearance: none; width: 100%; height: 6px; border-radius: 3px; background: var(--bdr); outline: none; }
-input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--blue); cursor: pointer; border: 2px solid var(--srf); box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
-
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--blue); cursor: pointer; border: 2px solid var(--srf); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 .ev-segmented { display: flex; gap: 4px; background: var(--srf-3); border-radius: var(--r6); padding: 4px; border: 1px solid var(--bdr); }
-.seg-btn { flex: 1; padding: 6px 0; border-radius: var(--r4); font-size: 11px; font-weight: 600; color: var(--muted); transition: all .15s; }
-.seg-btn.active { background: var(--srf); color: var(--text-main); box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.seg-btn { flex: 1; padding: 8px 0; border-radius: var(--r4); font-size: 12px; font-weight: 600; color: var(--muted); transition: all .2s; }
+.seg-btn.active { background: var(--srf); color: var(--text-main); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
 .shock-supply.active { color: var(--red); }
 .shock-demand.active { color: var(--blue); }
 .pulse-step.active { color: var(--amber); }
-
-.btn-del-ev { display: flex; align-items: center; justify-content: center; gap: 5px; width: 100%; padding: 8px; border-radius: var(--r6); border: 1px solid var(--red-dim); color: var(--red); font-size: 11px; font-weight: 600; background: var(--srf); transition: all .15s; }
+.btn-del-ev { display: flex; align-items: center; justify-content: center; gap: 5px; width: 100%; padding: 10px; border-radius: var(--r6); border: 1px solid var(--red-dim); color: var(--red); font-size: 12px; font-weight: 700; background: var(--srf); transition: all .2s; }
 .btn-del-ev:hover { background: var(--red-dim); border-color: var(--red); }
 
-/* Legend Tiles */
 .info-card { border-radius: var(--r8); border: 1px solid var(--bdr); background: var(--srf); padding: 12px 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
 .info-card-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
 .info-card-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
@@ -191,85 +146,87 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px;
 .info-card-body { font-size: 11px; color: var(--muted); line-height: 1.5; }
 
 /* ═══════════════════════════════════════════════
-   MAIN CONTENT & KPIS
+   MAIN CONTENT, LOADING & ERROR STATES
 ═══════════════════════════════════════════════ */
-.main { padding: 24px 32px; display: flex; flex-direction: column; gap: 20px; overflow-y: auto; }
+.main { padding: 32px 40px; display: flex; flex-direction: column; gap: 24px; overflow-y: auto; position: relative; }
 
-/* States */
-.loading-state, .error-state { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; }
-.loading-state { gap: 16px; color: var(--muted); }
-.spinner { width: 36px; height: 36px; border: 3px solid var(--bdr); border-top-color: var(--blue); border-radius: 50%; animation: spin .8s linear infinite; }
+.loading-state, .error-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 500px; width: 100%; }
+.loading-state { gap: 20px; color: var(--muted); font-weight: 600; font-size: 15px; }
+.spinner { width: 44px; height: 44px; border: 4px solid var(--bdr); border-top-color: var(--blue); border-radius: 50%; animation: spin .8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.error-state { display: none; background: var(--srf); border: 1px solid var(--red); border-radius: var(--r12); padding: 24px; gap: 12px; text-align: center; }
-.error-title { color: var(--red); font-weight: 700; font-size: 16px; }
 
-/* KPIs */
-.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.kpi-card { background: var(--srf); border: 1px solid var(--bdr); border-radius: var(--r12); padding: 18px 20px; position: relative; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
-.kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: var(--r12) var(--r12) 0 0; }
+.error-state { display: none; background: var(--srf); border: 1px solid var(--red); border-radius: var(--r12); padding: 40px; gap: 20px; text-align: center; box-shadow: 0 10px 25px rgba(239, 68, 68, 0.1); margin: auto; max-width: 600px; }
+.error-title { color: var(--red); font-weight: 800; font-size: 20px; display: flex; align-items: center; gap: 10px; justify-content: center; }
+.error-body { color: var(--text-main); font-size: 14px; line-height: 1.6; }
+.error-code { background: var(--srf-2); color: var(--red); padding: 12px; border-radius: var(--r8); font-family: var(--mono); font-size: 12px; text-align: left; width: 100%; white-space: pre-wrap; margin-top: 12px; border: 1px solid var(--red-dim); }
+.btn-retry { margin-top: 10px; padding: 12px 24px; background: var(--blue); color: white; border-radius: var(--r8); font-weight: 600; font-size: 14px; cursor: pointer; transition: background 0.2s; box-shadow: 0 4px 10px var(--blue-dim); }
+.btn-retry:hover { background: #2563EB; }
+
+/* ═══════════════════════════════════════════════
+   KPIS
+═══════════════════════════════════════════════ */
+.kpi-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.kpi-card { background: var(--srf); border: 1px solid var(--bdr); border-radius: var(--r12); padding: 24px; position: relative; box-shadow: 0 2px 5px rgba(0,0,0,0.02); transition: transform 0.2s; }
+.kpi-card:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.05); }
+.kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; border-radius: var(--r12) var(--r12) 0 0; }
 .kpi-card.cyan::before { background: var(--muted); }
 .kpi-card.blue::before { background: var(--blue); }
-.kpi-card.green::before { background: var(--green); }
-.kpi-card.amber::before { background: var(--amber); }
-.kpi-lbl { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-.kpi-val { font-size: 24px; font-weight: 700; color: var(--text-main); line-height: 1; margin-bottom: 8px; letter-spacing: -0.02em; }
+.kpi-lbl { font-size: 12px; font-weight: 800; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; letter-spacing: 0.05em; }
+.kpi-val { font-size: 28px; font-weight: 800; color: var(--text-main); line-height: 1; margin-bottom: 12px; letter-spacing: -0.02em; }
 .kpi-val.blue { color: var(--blue); }
-.kpi-val.green { color: var(--green); }
-.kpi-val.red { color: var(--red); }
-.kpi-sub { font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
-.kpi-delta { font-family: var(--mono); font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; }
+.kpi-sub { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 8px; font-weight: 500;}
+.kpi-delta { font-family: var(--mono); font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px; }
 .kpi-delta.up { background: var(--green-dim); color: var(--green); }
 .kpi-delta.dn { background: var(--red-dim); color: var(--red); }
 
 /* ═══════════════════════════════════════════════
-   CHART CARD
+   CHART CARD & SLIDER
 ═══════════════════════════════════════════════ */
-.chart-card { background: var(--srf); border: 1px solid var(--bdr); border-radius: var(--r12); padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
-.chart-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; gap: 16px; }
-.chart-title { font-size: 16px; font-weight: 700; color: var(--text-main); letter-spacing: -0.01em; }
-.chart-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
-.chart-legend { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
-.leg { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--text-main); }
-.l-line { width: 24px; height: 2px; border-radius: 1px; }
-.l-swatch { width: 12px; height: 12px; border-radius: 2px; }
-.chart-wrap { position: relative; }
-canvas { display: block; }
+.chart-card { background: var(--srf); border: 1px solid var(--bdr); border-radius: var(--r16); padding: 32px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+.chart-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; gap: 16px; }
+.chart-title { font-size: 18px; font-weight: 800; color: var(--text-main); letter-spacing: -0.01em; }
+.chart-sub { font-size: 13px; color: var(--muted); margin-top: 6px; font-weight: 500; }
+.chart-legend { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; margin-top: 14px;}
+.leg { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--muted); }
+.l-line { width: 24px; height: 3px; border-radius: 2px; }
+.l-swatch { width: 14px; height: 14px; border-radius: 3px; }
 
-/* Tooltip Light Theme */
-.tooltip { position: absolute; pointer-events: none; background: var(--srf); border: 1px solid var(--bdr); border-radius: var(--r8); padding: 14px 16px; font-size: 12px; min-width: 220px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); opacity: 0; transition: opacity .1s; z-index: 50; }
-.tt-date { font-size: 10px; color: var(--muted); font-weight: 700; text-transform: uppercase; margin-bottom: 10px; font-family: var(--mono); }
-.tt-row { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 6px; align-items: center; }
-.tt-lbl { color: var(--muted); font-weight: 500; }
-.tt-val { font-family: var(--mono); font-weight: 700; color: var(--text-main); }
-.tt-sep { height: 1px; background: var(--bdr); margin: 8px 0; }
-.ev-overlay { position: absolute; pointer-events: none; top: 0; left: 0; }
+.chart-wrap { position: relative; width: 100%; display: flex; flex-direction: column; gap: 20px; }
+.canvas-container { position: relative; width: 100%; min-height: 400px; display: flex;} 
+canvas { display: block; width: 100%; height: 100%; object-fit: contain;}
+.ev-overlay { position: absolute; top: 0; left: 0; pointer-events: none; }
+
+.slider-container { position: relative; width: 100%; height: 60px; cursor: pointer; background: var(--srf-2); border-radius: var(--r8); border: 1px solid var(--bdr); overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);}
+
+.tooltip { position: absolute; pointer-events: none; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border: 1px solid var(--bdr); border-radius: var(--r8); padding: 16px 20px; font-size: 13px; min-width: 240px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); opacity: 0; transition: opacity .15s ease-in-out; z-index: 50; }
+.tt-date { font-size: 11px; color: var(--muted); font-weight: 800; text-transform: uppercase; margin-bottom: 12px; font-family: var(--mono); letter-spacing: 0.05em; }
+.tt-row { display: flex; justify-content: space-between; gap: 20px; margin-bottom: 8px; align-items: center; }
+.tt-lbl { color: var(--muted); font-weight: 600; }
+.tt-val { font-family: var(--mono); font-weight: 800; color: var(--text-main); }
+.tt-sep { height: 1px; background: var(--bdr); margin: 12px 0; }
 
 /* ═══════════════════════════════════════════════
    TABLE CARD
 ═══════════════════════════════════════════════ */
-.table-card { background: var(--srf); border: 1px solid var(--bdr); border-radius: var(--r12); overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
-.table-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; border-bottom: 1px solid var(--bdr); background: var(--srf-2); }
-.table-title { font-size: 14px; font-weight: 700; color: var(--text-main); }
-.tbl-toggle { display: flex; gap: 6px; }
-.t-btn { padding: 6px 14px; border-radius: var(--r6); border: 1px solid var(--bdr); background: var(--srf); color: var(--muted); font-size: 11px; font-weight: 600; transition: all .15s; }
-.t-btn:hover { border-color: var(--blue); color: var(--blue); }
-.t-btn.active { background: var(--blue); border-color: var(--blue); color: #FFF; }
-.table-wrap { overflow-x: auto; max-height: 400px; overflow-y: auto; }
+.table-card { background: var(--srf); border: 1px solid var(--bdr); border-radius: var(--r16); overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+.table-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 32px; border-bottom: 1px solid var(--bdr); background: var(--srf-2); }
+.table-title { font-size: 16px; font-weight: 800; color: var(--text-main); }
+.tbl-toggle { display: flex; gap: 8px; }
+.t-btn { padding: 8px 16px; border-radius: var(--r6); border: 1px solid var(--bdr); background: var(--srf); color: var(--muted); font-size: 12px; font-weight: 700; transition: all .2s; }
+.t-btn:hover { border-color: var(--blue); color: var(--blue); box-shadow: 0 2px 4px var(--blue-dim);}
+.t-btn.active { background: var(--blue); border-color: var(--blue); color: #FFF; box-shadow: 0 2px 6px var(--blue-dim);}
+.table-wrap { overflow-x: auto; max-height: 450px; overflow-y: auto; }
 table { width: 100%; border-collapse: collapse; }
-thead th { padding: 12px 24px; text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--muted); background: var(--srf-2); border-bottom: 1px solid var(--bdr); position: sticky; top: 0; white-space: nowrap; z-index: 10; }
-tbody tr { border-bottom: 1px solid var(--bdr); transition: background .1s; }
+thead th { padding: 14px 32px; text-align: left; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); background: var(--srf-2); border-bottom: 1px solid var(--bdr); position: sticky; top: 0; white-space: nowrap; z-index: 10; }
+tbody tr { border-bottom: 1px solid var(--bdr); transition: background .2s; }
 tbody tr:hover { background: var(--srf-2); }
-tbody td { padding: 10px 24px; font-size: 12px; }
-.td-label { color: var(--text-main); font-weight: 600; }
-.td-mono { font-family: var(--mono); font-weight: 500; color: var(--text-main); }
-.td-up { font-family: var(--mono); font-weight: 600; color: var(--green); }
-.td-dn { font-family: var(--mono); font-weight: 600; color: var(--red); }
+tbody td { padding: 14px 32px; font-size: 13px; }
+.td-label { color: var(--text-main); font-weight: 700; }
+.td-mono { font-family: var(--mono); font-weight: 600; color: var(--text-main); }
+.td-up { font-family: var(--mono); font-weight: 700; color: var(--green); }
+.td-dn { font-family: var(--mono); font-weight: 700; color: var(--red); }
 .td-neu { font-family: var(--mono); color: var(--muted); }
-.td-sub { font-size: 11px; color: var(--muted); }
-.mini-bar-track { width: 80px; height: 6px; background: var(--bdr); border-radius: 3px; overflow: hidden; }
-.mini-bar-fill { height: 100%; border-radius: 3px; transition: width .3s; }
-.mini-bar-fill.pos { background: var(--green); }
-.mini-bar-fill.neg { background: var(--red); }
+.td-sub { font-size: 12px; color: var(--muted); font-weight: 500;}
 </style>
 </head>
 <body>
@@ -279,7 +236,7 @@ tbody td { padding: 10px 24px; font-size: 12px; }
     <div class="h-mark">CPO</div>
     <div>
       <div class="h-title">CPO Forecast Analysis</div>
-      <div class="h-sub">Transfer Function Model · Box-Tiao (1975)</div>
+      <div class="h-sub">Historical & Transfer Function Prediction Model</div>
     </div>
   </div>
   <div class="h-status">
@@ -290,147 +247,105 @@ tbody td { padding: 10px 24px; font-size: 12px; }
 </header>
 
 <div class="app">
-
   <div class="sidebar">
-
-    <div class="sb-section">
-      <div class="sb-label">Forecast Horizon</div>
-      <div class="term-toggle">
-        <button class="term-btn active" id="btn-term-short" onclick="setTerm('short')">Short Term (1-3 Mo)</button>
-        <button class="term-btn" id="btn-term-long" onclick="setTerm('long')">Long Term (6-12 Mo)</button>
+    <div class="sb-section" id="historical-zoom-section">
+      <div class="sb-label">Viewzone Timeline</div>
+      <div class="period-grid-hist">
+        <button class="hz-btn active" onclick="setViewZoom(3, this)">3M</button>
+        <button class="hz-btn" onclick="setViewZoom(6, this)">6M</button>
+        <button class="hz-btn" onclick="setViewZoom(12, this)">1Y</button>
+        <button class="hz-btn" onclick="setViewZoom(24, this)">2Y</button>
+        <button class="hz-btn" onclick="setViewZoom(36, this)">3Y</button>
+        <button class="hz-btn" onclick="setViewZoom(60, this)">5Y</button>
+        <button class="hz-btn" onclick="setViewZoom(120, this)">10Y</button>
+        <button class="hz-btn" onclick="setViewZoom('max', this)">Max</button>
       </div>
-      <div class="sb-label" style="margin-top:16px;">Time Zoom</div>
-      <div class="period-grid" id="zoom-controls">
-        </div>
+      <div style="margin-top:14px; font-size:11px; color:var(--muted); line-height:1.5; font-weight: 500;">
+        *Geser Slider di bawah grafik untuk navigasi bebas lintas waktu (Historis ↔ Prediksi).
+      </div>
     </div>
 
     <div class="sb-section">
       <div class="sb-label">Zoomed Area Stats</div>
       <div class="stat-grid">
-        <div class="stat-row">
-          <span class="stat-lbl">Hari Ditampilkan</span>
-          <span class="stat-val" id="st-days">—</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-lbl">Avg Baseline</span>
-          <span class="stat-val" id="st-base">—</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-lbl">Avg Intervensi</span>
-          <span class="stat-val cy" id="st-interv">—</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-lbl">Kumulatif Dampak</span>
-          <span class="stat-val" id="st-cum">—</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-lbl">Peak Dampak</span>
-          <span class="stat-val up" id="st-peak">—</span>
-        </div>
+        <div class="stat-row"><span class="stat-lbl">Hari Ditampilkan</span><span class="stat-val" id="st-days">—</span></div>
+        <div class="stat-row"><span class="stat-lbl">Avg BAU / Historis</span><span class="stat-val" id="st-base">—</span></div>
+        <div class="stat-row" id="st-interv-row"><span class="stat-lbl">Avg Skenario</span><span class="stat-val cy" id="st-interv">—</span></div>
+        <div class="stat-row" id="st-cum-row"><span class="stat-lbl">Kumulatif Dampak</span><span class="stat-val" id="st-cum">—</span></div>
+        <div class="stat-row" id="st-peak-row"><span class="stat-lbl">Peak Dampak</span><span class="stat-val up" id="st-peak">—</span></div>
       </div>
     </div>
 
     <div class="sb-scroll">
-      <div>
+      <div id="event-manipulation-section">
         <div class="event-header">
           <div class="sb-label" style="margin-bottom:0">Market Scenarios</div>
           <button class="btn-add-event" onclick="addEvent()">＋ Tambah</button>
         </div>
-        <div class="event-list" id="event-list">
-          </div>
-      </div>
-
-      <div class="info-card" style="margin-top:10px;">
-        <div class="info-card-head">
-          <div class="info-card-dot" style="background:var(--green)"></div>
-          <span class="info-card-name">Zona Bullish</span>
-          <span class="info-card-badge" style="background:var(--green-dim);color:var(--green)">↑ BULL</span>
-        </div>
-        <div class="info-card-body">Intervensi mengangkat harga di atas baseline.</div>
-      </div>
-      <div class="info-card">
-        <div class="info-card-head">
-          <div class="info-card-dot" style="background:var(--red)"></div>
-          <span class="info-card-name">Zona Bearish</span>
-          <span class="info-card-badge" style="background:var(--red-dim);color:var(--red)">↓ BEAR</span>
-        </div>
-        <div class="info-card-body">Intervensi menekan harga di bawah baseline.</div>
-      </div>
-      <div class="info-card">
-        <div class="info-card-head">
-          <div class="info-card-dot" style="background:var(--muted)"></div>
-          <span class="info-card-name">Baseline BAU</span>
-          <span class="info-card-badge" style="background:var(--srf-3);color:var(--muted)">REF</span>
-        </div>
-        <div class="info-card-body">Model ARIMA-GARCH — momentum historis tanpa intervensi.</div>
-      </div>
-      <div class="info-card">
-        <div class="info-card-head">
-          <div class="info-card-dot" style="background:var(--blue)"></div>
-          <span class="info-card-name">Skenario Intervensi</span>
-          <span class="info-card-badge" style="background:var(--blue-dim);color:var(--blue)">TF</span>
-        </div>
-        <div class="info-card-body">Transfer Function (Box-Tiao) — memasukkan shock ω dengan decay δ.</div>
+        <div class="event-list" id="event-list"></div>
       </div>
     </div>
   </div>
 
   <div class="main" id="main-content">
-
     <div class="loading-state" id="loading-state">
       <div class="spinner"></div>
-      <div class="loading-text">Loading forecast data...</div>
+      <div class="loading-text">Menyinkronkan Data Historis & Prediksi...</div>
     </div>
+    
     <div class="error-state" id="error-state">
-      <div class="error-title">⚠ Gagal Memuat Data JSON</div>
-      <div class="error-body">Pastikan file <code>cpo_shortterm_forecast.json</code> tersedia dan Anda menjalankan local server.</div>
-      <div class="error-hint">python -m http.server 8000</div>
+      <div class="error-title">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        Gagal Memuat Data
+      </div>
+      <div class="error-body">
+        Proses inisialisasi terhenti. Pastikan file <b>cpo_shortterm_forecast.json</b> dan <b>cpo_shortterm_history_malaysia_prices.json</b> tersedia di folder yang sama.
+        <div class="error-code" id="error-message-detail">No error details available.</div>
+      </div>
+      <button class="btn-retry" onclick="location.reload()">Muat Ulang Halaman</button>
     </div>
 
-    <div id="dashboard" style="display:none;flex-direction:column;gap:20px;">
-
+    <div id="dashboard" style="display:none;flex-direction:column;gap:24px;">
+      
       <div class="kpi-row" id="kpi-row"></div>
 
       <div class="chart-card">
         <div class="chart-top">
           <div>
-            <div class="chart-title">CPO Price Projection (MYR/MT)</div>
-            <div class="chart-sub" id="chart-sub">Baseline vs. Intervention Scenario</div>
+            <div class="chart-title" id="main-chart-title">Unified CPO Price Timeline (MYR/MT)</div>
+            <div class="chart-sub" id="chart-sub">Historical Data seamlessly connected to Scenario Projection</div>
+            <div class="chart-legend" id="main-chart-legend">
+              <div class="leg"><div class="l-line" style="background:var(--text-main);height:3px"></div> Historical Price</div>
+              <div class="leg"><div class="l-line" style="background:var(--muted);border-top:3px dashed var(--muted);height:0"></div> Projected BAU</div>
+              <div class="leg"><div class="l-line" style="background:var(--blue)"></div> Scenario Path</div>
+              <div class="leg"><div class="l-swatch" style="background:var(--green-fill);border:1px solid var(--green)"></div> Bullish Impact</div>
+              <div class="leg"><div class="l-swatch" style="background:var(--red-fill);border:1px solid var(--red)"></div> Bearish Impact</div>
+            </div> 
           </div>
           
-          <div class="chart-legend">
-            <div class="leg">
-              <div class="l-line" style="background:var(--muted);border-top:2px dashed var(--muted);height:0"></div>
-              Baseline (BAU)
-            </div>
-            <div class="leg">
-              <div class="l-line" style="background:var(--blue)"></div>
-              With Interventions
-            </div>
-            <div class="leg">
-              <div class="l-swatch" style="background:var(--green-fill);border:1px solid var(--green)"></div>
-              Bullish Impact
-            </div>
-            <div class="leg">
-              <div class="l-swatch" style="background:var(--red-fill);border:1px solid var(--red)"></div>
-              Bearish Impact
-            </div>
-          </div> <div class="ev-field" style="margin-left: auto;">
-            <div class="ev-segmented" style="width: 200px;">
+          <div class="ev-field" style="margin-left: auto;">
+            <div class="ev-segmented" style="width: 220px;">
               <button class="seg-btn active" id="btn-view-price" onclick="toggleChartView('price')">Price View</button>
               <button class="seg-btn" id="btn-view-percentile" onclick="toggleChartView('percentile')">Percentile View</button>
             </div>
           </div>
-          </div> <div class="chart-wrap" id="chart-wrap">
-          <canvas id="cv"></canvas>
-          <svg class="ev-overlay" id="ev-overlay"></svg>
-          <div class="tooltip" id="tooltip"></div>
+        </div> 
+
+        <div class="chart-wrap" id="chart-wrap">
+          <div class="canvas-container" id="canvas-container">
+            <canvas id="cv"></canvas>
+            <svg class="ev-overlay" id="ev-overlay"></svg>
+            <div class="tooltip" id="tooltip"></div>
+          </div>
+          <div class="slider-container" id="slider-container">
+            <canvas id="cv-slider"></canvas>
+          </div>
         </div>
       </div>
 
       <div class="table-card">
         <div class="table-header">
-          <div class="table-title">Monthly Impact Summary</div>
+          <div class="table-title">Data Summary Breakdown</div>
           <div class="tbl-toggle">
             <button class="t-btn active" onclick="setTblMode('monthly',this)">Per Bulan</button>
             <button class="t-btn" onclick="setTblMode('weekly',this)">Per Minggu</button>
@@ -451,80 +366,148 @@ tbody td { padding: 10px 24px; font-size: 12px; }
 
 <script>
 // ─────────────────────────────────────────────
-//  DATA LAYER
+//  GLOBAL STATE & UNIFIED DATA LAYER
 // ─────────────────────────────────────────────
-let BASE_DATA = [];
-let CALC_DATA = [];
-let VIS_DATA  = [];
+let FULL_DATA = [];  
+let CALC_DATA = [];  
+let VIS_DATA  = [];  
 
-// Event Kustomisasi (Menggunakan referensi dari gambar)
+let viewStartIdx = 0;
+let viewEndIdx = 0;
+
 let EVENTS = [
-  { id: 1, name: 'Pre-B50 Stock Build-Up', source: 'demand', shockType: 'step', omega: 130, delta: 0.985, start: '2026-04-20', active: true },
-  { id: 2, name: 'Policy Shock: B50 Mandate', source: 'demand', shockType: 'step', omega: 195, delta: 0.990, start: '2026-08-01', active: true },
-  { id: 3, name: 'Seasonality: Peak Harvest', source: 'supply', shockType: 'pulse', omega: 100, delta: 0.850, start: '2026-09-15', active: true },
-  { id: 4, name: 'Geopolitics: Shipping Alert', source: 'supply', shockType: 'pulse', omega: 85, delta: 0.880, start: '2026-11-10', active: false }
+  { id: 1, name: 'Pre-B50 Stock Build-Up', source: 'demand', shockType: 'step', omega: 130, delta: 0.985, start: '', active: true },
+  { id: 2, name: 'Policy Shock: B50 Mandate', source: 'demand', shockType: 'step', omega: 195, delta: 0.990, start: '', active: true },
+  { id: 3, name: 'Seasonality: Peak Harvest', source: 'supply', shockType: 'pulse', omega: 100, delta: 0.850, start: '', active: true }
 ];
-
-let OPEN_CARDS = new Set([1, 2, 3]); // Buka 3 card utama
-let termMode   = 'short'; // 'short' atau 'long'
-let periodDays = 90;      // default zoom 3M untuk short term
+let OPEN_CARDS = new Set([1, 2, 3]); 
 let tblMode    = 'monthly';
-let CV, CX;
 
-const P = { t:16, r:24, b:44, l:82 };
+let CV, CX, SLIDER_CV, SLIDER_CX;
+const P = { t:20, r:24, b:44, l:82 }; 
 const MO_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
+// ─────────────────────────────────────────────
+//  SUPER ROBUST PARSERS 
+// ─────────────────────────────────────────────
+const parsePrice = val => {
+    if (typeof val === 'number') return val;
+    if (val === null || val === undefined || val === '') return NaN;
+    return parseFloat(val.toString().replace(/['",\r\s]/g, ''));
+};
+
+// ─────────────────────────────────────────────
+//  DATA LOADING & MERGING 
+// ─────────────────────────────────────────────
 async function loadData() {
   try {
-    const res = await fetch('cpo_shortterm_forecast.json');
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const json = await res.json();
+    let rawHist = [];
+    let rawPred = [];
 
-    BASE_DATA = json.map(d => ({ date: d.date, baseline_myr: +d.baseline_myr }));
+    // 1. BULLETPROOF HISTORICAL JSON LOADER
+    try {
+      const resHist = await fetch('cpo_shortterm_history_malaysia_prices.json');
+      if (resHist.ok) {
+        const histRaw = await resHist.json();
+        let histArr = Array.isArray(histRaw) ? histRaw : (histRaw.data || histRaw.prices || []);
+        
+        for (let i = 0; i < histArr.length; i++) {
+          let pStr = histArr[i].price;
+          let dStr = histArr[i].date;
+          let price = parsePrice(pStr);
+          
+          if (dStr && !isNaN(price)) {
+            rawHist.push({ date: String(dStr).trim(), price: price });
+          }
+        }
+        rawHist.sort((a, b) => a.date.localeCompare(b.date));
+      } else {
+        console.warn("HTTP Error memuat history JSON:", resHist.status);
+      }
+    } catch(err) { 
+      console.warn("Info: Data Historical JSON dilewati karena gagal memuat.", err); 
+    }
+
+    // 2. BULLETPROOF JSON LOADER (PREDIKSI)
+    const resJSON = await fetch('cpo_shortterm_forecast.json');
+    if (!resJSON.ok) throw new Error(`Gagal memuat JSON Prediksi. HTTP Status: ${resJSON.status}`);
+    const textJSON = await resJSON.text();
+    const jsonRaw = JSON.parse(textJSON);
+    
+    let jsonArr = Array.isArray(jsonRaw) ? jsonRaw : (jsonRaw.data || jsonRaw.forecast || []);
+
+    rawPred = jsonArr.map(d => {
+        let pVal = d.baseline_myr ?? d.Baseline_MYR ?? d.prediction ?? d.price ?? d.Price ?? d.value ?? d.Value ?? Object.values(d).find(v => typeof v === 'number');
+        let dateVal = d.date ?? d.Date ?? d.tanggal ?? d.Tanggal ?? d.time ?? d.Time ?? Object.values(d).find(v => typeof v === 'string' && v.match(/^\d{4}-\d{2}-\d{2}/));
+        return { date: String(dateVal || '').trim(), baseline_myr: parsePrice(pVal) };
+    }).filter(d => d.date && !isNaN(d.baseline_myr));
+
+    rawPred.sort((a, b) => a.date.localeCompare(b.date));
+
+    // 3. Menyatukan Data (Unify)
+    if(rawPred.length > 0 && rawHist.length > 0) {
+       const predStartDate = rawPred[0].date;
+       rawHist = rawHist.filter(d => d.date < predStartDate); // Potong overlap
+    }
+
+    FULL_DATA = [
+       ...rawHist.map(d => ({ date: d.date, baseline_myr: d.price, is_actual: true })),
+       ...rawPred.map(d => ({ date: d.date, baseline_myr: d.baseline_myr, is_actual: false }))
+    ];
+
+    FULL_DATA = FULL_DATA.filter(d => !isNaN(d.baseline_myr));
+
+    // Jika kosong, berikan log jelas untuk mempermudah perbaikan
+    if(FULL_DATA.length === 0) {
+       throw new Error(`Data kosong. Berhasil membaca file tapi gagal menemukan format tabel yang pas.\n\nStatistik Debug:\nBaris History ditemukan: ${rawHist.length}\nBaris Prediksi ditemukan: ${rawPred.length}`);
+    }
+
+    // 4. Sinkronisasi Tanggal Default Event
+    const predsOnly = FULL_DATA.filter(d => !d.is_actual);
+    if(predsOnly.length > 10) {
+        EVENTS[0].start = predsOnly[1].date; 
+        EVENTS[1].start = predsOnly[Math.floor(predsOnly.length * 0.2)].date; 
+        EVENTS[2].start = predsOnly[Math.floor(predsOnly.length * 0.5)].date; 
+    } else if (predsOnly.length > 0) {
+        EVENTS.forEach(e => e.start = predsOnly[0].date);
+    }
 
     document.getElementById('loading-state').style.display = 'none';
     document.getElementById('dashboard').style.display = 'flex';
 
     boot();
   } catch (err) {
+    console.error("System Failure:", err);
     document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'none';
     const errEl = document.getElementById('error-state');
     errEl.style.display = 'flex';
-    errEl.querySelector('.error-body').innerHTML += `<br><code>${err.message}</code>`;
+    document.getElementById('error-message-detail').innerText = `Pesan Sistem:\n${err.message}`;
   }
 }
 
 // ─────────────────────────────────────────────
-//  TERM & ZOOM CONTROL
+//  ZOOM CONTROL
 // ─────────────────────────────────────────────
-function setTerm(mode) {
-  termMode = mode;
-  document.getElementById('btn-term-short').classList.toggle('active', mode === 'short');
-  document.getElementById('btn-term-long').classList.toggle('active', mode === 'long');
+function setViewZoom(months, btn) {
+  if(btn) {
+    document.querySelectorAll('.hz-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
 
-  const zoomContainer = document.getElementById('zoom-controls');
-  if (mode === 'short') {
-    zoomContainer.innerHTML = `
-      <button class="p-btn" data-days="14" onclick="setPeriod(this)">2W</button>
-      <button class="p-btn" data-days="30" onclick="setPeriod(this)">1M</button>
-      <button class="p-btn active" data-days="90" onclick="setPeriod(this)">3M</button>
-    `;
-    periodDays = 90; // Default short
+  if (!CALC_DATA.length) return;
+  
+  viewEndIdx = CALC_DATA.length - 1; 
+  
+  if (months === 'max') {
+    viewStartIdx = 0;
   } else {
-    zoomContainer.innerHTML = `
-      <button class="p-btn" data-days="90" onclick="setPeriod(this)">3M</button>
-      <button class="p-btn" data-days="180" onclick="setPeriod(this)">6M</button>
-      <button class="p-btn active" data-days="9999" onclick="setPeriod(this)">All (1Y)</button>
-    `;
-    periodDays = 9999; // Default long
+    const targetDate = new Date(CALC_DATA[viewEndIdx].date);
+    targetDate.setMonth(targetDate.getMonth() - months);
+    const cutoff = targetDate.toISOString().split('T')[0];
+    viewStartIdx = CALC_DATA.findIndex(d => d.date >= cutoff);
+    if (viewStartIdx === -1) viewStartIdx = 0;
   }
-  refreshVis();
-}
-
-function setPeriod(btn) {
-  periodDays = parseInt(btn.dataset.days, 10);
-  document.querySelectorAll('.p-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
   refreshVis();
 }
 
@@ -532,29 +515,23 @@ function setPeriod(btn) {
 //  CALCULATION LAYER
 // ─────────────────────────────────────────────
 function applyEvents() {
-  CALC_DATA = BASE_DATA.map(d => ({
-    date: d.date, baseline_myr: d.baseline_myr, interv_myr: d.baseline_myr, net_impact: 0
-  }));
-
+  CALC_DATA = FULL_DATA.map(d => ({ date: d.date, baseline_myr: d.baseline_myr, interv_myr: d.baseline_myr, net_impact: 0, is_actual: d.is_actual }));
+  
   EVENTS.forEach(ev => {
-    if (!ev.active) return;
-    const startIdx = CALC_DATA.findIndex(d => d.date === ev.start);
-    if (startIdx === -1) return;
-
+    if (!ev.active || !ev.start) return;
+    const startIdx = CALC_DATA.findIndex(d => d.date >= ev.start && !d.is_actual);
+    if (startIdx === -1) return; 
+    
     let prevStepVal = 0;
     for (let i = startIdx; i < CALC_DATA.length; i++) {
       const t = i - startIdx;
       let impact = 0;
-      
-      if (ev.shockType === 'pulse') {
-        impact = ev.omega * Math.pow(ev.delta, t);
-      } else if (ev.shockType === 'step') {
+      if (ev.shockType === 'pulse') impact = ev.omega * Math.pow(ev.delta, t);
+      else if (ev.shockType === 'step') {
         if (t === 0) impact = ev.omega * (1 - ev.delta);
         else impact = ev.delta * prevStepVal + ev.omega * (1 - ev.delta);
         prevStepVal = impact;
       }
-      
-      // Supply shock (+omega) = price drops
       CALC_DATA[i].interv_myr += (ev.source === 'supply' ? -impact : impact);
     }
   });
@@ -563,65 +540,59 @@ function applyEvents() {
   refreshVis();
 }
 
-// ─────────────────────────────────────────────
-//  PRESENTATION LAYER
-// ─────────────────────────────────────────────
 function getVisData() {
-  if (periodDays >= CALC_DATA.length) return [...CALC_DATA];
-  return CALC_DATA.slice(0, periodDays); // For forecasting, slice from START
+  if (!CALC_DATA.length) return [];
+  if (viewStartIdx < 0) viewStartIdx = 0;
+  if (viewEndIdx >= CALC_DATA.length) viewEndIdx = CALC_DATA.length - 1;
+  return CALC_DATA.slice(viewStartIdx, viewEndIdx + 1);
 }
 
 function refreshVis() {
   VIS_DATA = getVisData();
-  drawChart(); updateKPIs(); updateTable(); updateSidebarStats(); updateHeader();
+  updateKPIs(); updateTable(); updateSidebarStats(); updateHeader();
+  resizeChart(); 
 }
 
+// ─────────────────────────────────────────────
+//  PRESENTATION & CHARTING
+// ─────────────────────────────────────────────
 function updateHeader() {
   const n = VIS_DATA.length; if (!n) return;
-  const fd = VIS_DATA[0].date, ld = VIS_DATA[n-1].date;
   const fmt = s => { const [y,m] = s.split('-'); return MO_NAMES[+m-1] + ' ' + y; };
-  document.getElementById('hdr-range').textContent = `${fmt(fd)} – ${fmt(ld)}`;
+  document.getElementById('hdr-range').textContent = `${fmt(VIS_DATA[0].date)} – ${fmt(VIS_DATA[n-1].date)}`;
   document.getElementById('hdr-days').textContent  = `${n} Hari`;
 }
 
-// Gap calculation is dynamic based on VIS_DATA (zoomed area)
 function updateKPIs() {
   const d = VIS_DATA, n = d.length; if (!n) return;
-  const avgBase   = d.reduce((a,r) => a + r.baseline_myr, 0) / n;
+  const avgBase = d.reduce((a,r) => a + r.baseline_myr, 0) / n;
   const avgInterv = d.reduce((a,r) => a + r.interv_myr, 0) / n;
-  const cumImp    = d.reduce((a,r) => a + r.net_impact, 0);
-  
-  // Find largest absolute impact in the visible period
-  const peakImp   = d.reduce((prev, curr) => Math.abs(curr.net_impact) > Math.abs(prev) ? curr.net_impact : prev, 0);
-  
-  const diff      = avgInterv - avgBase;
   const fmt = v => 'RM ' + Math.round(v).toLocaleString('id-ID');
 
-  function kpi(lbl, val, sub, valClass, deltaText, deltaDir) {
-    return `<div class="kpi-card cyan">
-      <div class="kpi-lbl">${lbl}</div>
-      <div class="kpi-val ${valClass}">${val}</div>
-      <div class="kpi-sub">${deltaText ? `<span class="kpi-delta ${deltaDir}">${deltaText}</span>` : ''}<span>${sub}</span></div>
-    </div>`;
+  function kpi(lbl, val, sub, valClass, dText, dDir) {
+    return `<div class="kpi-card cyan"><div class="kpi-lbl">${lbl}</div><div class="kpi-val ${valClass}">${val}</div><div class="kpi-sub">${dText ? `<span class="kpi-delta ${dDir}">${dText}</span>` : ''}<span>${sub}</span></div></div>`;
   }
   
-  document.getElementById('kpi-row').innerHTML =
-    kpi('AVG BASELINE', fmt(avgBase), 'Business-as-usual price', '', null, '') +
-    kpi('AVG WITH SCENARIOS', fmt(avgInterv), 'vs baseline', 'blue', (diff >= 0 ? '↑ ' : '↓ ') + Math.abs(diff).toFixed(0) + ' MYR', diff >= 0 ? 'up' : 'dn') +
-    kpi('CUMULATIVE GAP IMPACT', (cumImp >= 0 ? '+' : '') + Math.round(cumImp).toLocaleString('id-ID') + ' MYR', 'Sum of daily deviations in view', 'green', null, '') +
-    kpi('PEAK GAP IMPACT', (peakImp >= 0 ? '+' : '') + Math.round(peakImp) + ' MYR', 'Largest deviation in view', 'green', null, '');
+  const diff = avgInterv - avgBase;
+  const showDiff = Math.abs(diff) > 0.5; 
+  
+  document.getElementById('kpi-row').innerHTML = 
+    kpi('AVG BAU / HISTORICAL', fmt(avgBase), 'In selected view window', '', null, '') + 
+    kpi('AVG WITH SCENARIOS', fmt(avgInterv), 'Projected line', 'blue', showDiff ? ((diff >= 0 ? '↑ ' : '↓ ') + Math.abs(diff).toFixed(0) + ' MYR') : null, diff >= 0 ? 'up' : 'dn');
 }
 
 function updateSidebarStats() {
   const d = VIS_DATA, n = d.length; if (!n) return;
   const avgBase = d.reduce((a,r) => a + r.baseline_myr, 0) / n;
-  const avgInterv = d.reduce((a,r) => a + r.interv_myr, 0) / n;
-  const cumImp = d.reduce((a,r) => a + r.net_impact, 0);
-  const peakImp = d.reduce((prev, curr) => Math.abs(curr.net_impact) > Math.abs(prev) ? curr.net_impact : prev, 0);
   const fmt = v => 'RM ' + Math.round(v).toLocaleString('id-ID');
 
   document.getElementById('st-days').textContent = n;
   document.getElementById('st-base').textContent = fmt(avgBase);
+  
+  const avgInterv = d.reduce((a,r) => a + r.interv_myr, 0) / n;
+  const cumImp = d.reduce((a,r) => a + r.net_impact, 0);
+  const peakImp = d.reduce((prev, curr) => Math.abs(curr.net_impact) > Math.abs(prev) ? curr.net_impact : prev, 0);
+  
   document.getElementById('st-interv').textContent = fmt(avgInterv);
   document.getElementById('st-cum').textContent = (cumImp>=0?'+':'')+Math.round(cumImp).toLocaleString('id-ID');
   document.getElementById('st-cum').className = 'stat-val '+(cumImp>=0?'up':'dn');
@@ -630,27 +601,132 @@ function updateSidebarStats() {
 }
 
 // ─────────────────────────────────────────────
-//  CHARTING (LIGHT THEME)
+//  SLIDER EVENTS (VIRTUAL CLAMP & HITBOX BESAR)
 // ─────────────────────────────────────────────
+let isDraggingSlider = false, dragType = null, dragStartX = 0, initialStartIdx = 0, initialEndIdx = 0;
+
+function initSliderEvents() {
+  let rect;
+  SLIDER_CV.addEventListener('mousedown', (e) => {
+    if(!CALC_DATA.length) return; 
+    rect = SLIDER_CV.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const total = CALC_DATA.length;
+    const trackW = SLIDER_CV.width;
+    
+    const startX = (viewStartIdx / (total-1)) * trackW;
+    const endX = (viewEndIdx / (total-1)) * trackW;
+    
+    dragStartX = x; initialStartIdx = viewStartIdx; initialEndIdx = viewEndIdx; isDraggingSlider = true;
+    
+    // HITBOX: Toleransi besar 25px
+    const tolerance = 25; 
+    
+    if (Math.abs(x - startX) <= tolerance) { dragType = 'resizeLeft'; SLIDER_CV.style.cursor = 'ew-resize'; }
+    else if (Math.abs(x - endX) <= tolerance) { dragType = 'resizeRight'; SLIDER_CV.style.cursor = 'ew-resize'; }
+    else if (x > startX && x < endX) { dragType = 'pan'; SLIDER_CV.style.cursor = 'grabbing'; }
+    else { 
+      dragType = 'pan';
+      const wWidth = viewEndIdx - viewStartIdx;
+      let clampedX = Math.max(0, Math.min(x, trackW));
+      let centerIdx = Math.round((clampedX / trackW) * (total-1));
+      
+      viewStartIdx = Math.max(0, centerIdx - Math.floor(wWidth/2));
+      viewEndIdx = Math.min(total - 1, viewStartIdx + wWidth);
+      
+      document.querySelectorAll('.hz-btn').forEach(b => b.classList.remove('active'));
+      refreshVis();
+    }
+  });
+  
+  window.addEventListener('mousemove', (e) => {
+    if (!CALC_DATA.length) return;
+    rect = SLIDER_CV.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const total = CALC_DATA.length;
+    const trackW = SLIDER_CV.width;
+    
+    const startX = (viewStartIdx / (total-1)) * trackW;
+    const endX = (viewEndIdx / (total-1)) * trackW;
+    const tolerance = 25;
+    
+    // HOVER POINTER LOGIC
+    if (!isDraggingSlider) {
+       if (Math.abs(x - startX) <= tolerance || Math.abs(x - endX) <= tolerance) {
+           SLIDER_CV.style.cursor = 'ew-resize';
+       } else if (x > startX && x < endX) {
+           SLIDER_CV.style.cursor = 'grab';
+       } else {
+           SLIDER_CV.style.cursor = 'pointer';
+       }
+       return; 
+    }
+
+    // DRAG MOVEMENT LOGIC
+    const idxDelta = Math.round(((x - dragStartX) / trackW) * (total-1));
+    
+    if (dragType === 'pan') {
+       const wWidth = initialEndIdx - initialStartIdx;
+       let nS = initialStartIdx + idxDelta; let nE = initialEndIdx + idxDelta;
+       if (nS < 0) { nS = 0; nE = wWidth; }
+       if (nE >= total) { nE = total - 1; nS = total - 1 - wWidth; }
+       viewStartIdx = nS; viewEndIdx = nE;
+    } else if (dragType === 'resizeLeft') {
+       viewStartIdx = Math.max(0, Math.min(initialStartIdx + idxDelta, viewEndIdx - 10)); // Min 10 hari
+    } else if (dragType === 'resizeRight') {
+       viewEndIdx = Math.min(total - 1, Math.max(initialEndIdx + idxDelta, viewStartIdx + 10)); 
+    }
+    
+    document.querySelectorAll('.hz-btn').forEach(b => b.classList.remove('active'));
+    refreshVis();
+  });
+  
+  window.addEventListener('mouseup', () => { 
+      if(isDraggingSlider) { isDraggingSlider = false; dragType = null; SLIDER_CV.style.cursor = 'default'; }
+  });
+  SLIDER_CV.addEventListener('mouseleave', () => { 
+      if(!isDraggingSlider) SLIDER_CV.style.cursor = 'default';
+  });
+}
+
 function initChart() {
   CV = document.getElementById('cv'); CX = CV.getContext('2d');
-  resizeChart(); window.addEventListener('resize', resizeChart);
+  SLIDER_CV = document.getElementById('cv-slider'); SLIDER_CX = SLIDER_CV.getContext('2d');
+  
+  window.addEventListener('resize', resizeChart);
   CV.addEventListener('mousemove', onHover);
   CV.addEventListener('mouseleave', () => { document.getElementById('tooltip').style.opacity = '0'; });
+  
+  initSliderEvents();
 }
 
 function resizeChart() {
+  if (!CV || !SLIDER_CV) return;
   const wrap = document.getElementById('chart-wrap');
-  CV.width  = wrap.clientWidth; CV.height = Math.max(380, Math.round(wrap.clientWidth * 0.4));
-  const svg = document.getElementById('ev-overlay'); svg.setAttribute('width', CV.width); svg.setAttribute('height', CV.height);
+  const cw = wrap.clientWidth;
+  
+  CV.width = cw; CV.height = Math.max(400, Math.round(cw * 0.45));
+  const svg = document.getElementById('ev-overlay'); 
+  svg.setAttribute('width', CV.width); svg.setAttribute('height', CV.height);
+  
+  SLIDER_CV.width = cw; SLIDER_CV.height = 60; 
+  
+  drawChart();
+  drawSlider(); 
+}
+
+let chartViewMode = 'price';
+function toggleChartView(mode) {
+  chartViewMode = mode;
+  document.getElementById('btn-view-price').classList.toggle('active', mode === 'price');
+  document.getElementById('btn-view-percentile').classList.toggle('active', mode === 'percentile');
   drawChart();
 }
 
-function getPlotArea() { return { x: P.l, y: P.t, w: CV.width - P.l - P.r, h: CV.height - P.t - P.b }; }
-
 function drawChart() {
   if (!CX || !VIS_DATA.length) return;
-  const d = VIS_DATA, n = d.length, a = getPlotArea();
+  const d = VIS_DATA, n = d.length;
+  const a = { x: P.l, y: P.t, w: CV.width - P.l - P.r, h: CV.height - P.t - P.b };
   const allVals = [...d.map(r => r.baseline_myr), ...d.map(r => r.interv_myr)];
   const lo = Math.min(...allVals), hi = Math.max(...allVals);
   const span = Math.max(hi - lo, 200), padB = span * 0.20, padT = span * 0.15;
@@ -658,10 +734,14 @@ function drawChart() {
 
   const tx = i => a.x + (n > 1 ? i / (n - 1) : 0.5) * a.w;
   const ty = v => a.y + a.h - ((v - yMin) / yR) * a.h;
+  CV._d = { d, tx, ty }; 
 
   CX.clearRect(0, 0, CV.width, CV.height);
 
-  // Horizontal Grid Lines
+  if (chartViewMode === 'percentile') {
+    renderPercentileOverlay(CX, ty, a.x, CV.width - P.r, a.w);
+  }
+
   for (let g = 0; g <= 5; g++) {
     const v = yMin + (yR / 5) * g, gy = ty(v);
     CX.strokeStyle = '#E2E8F0'; CX.lineWidth = 1;
@@ -670,219 +750,317 @@ function drawChart() {
     CX.fillText('RM ' + Math.round(v).toLocaleString('id-ID'), a.x - 12, gy + 4);
   }
 
-  // X-Axis Labels — detail level adapts to zoom window
-  const xLabels = [];
-  if (n <= 14) {
-    // 2W: show every day label (dd Mon)
-    d.forEach((r, i) => {
-      const [y, m, dy] = r.date.split('-');
-      xLabels.push({ i, lbl: +dy + ' ' + MO_NAMES[+m-1], tick: true });
-    });
-  } else if (n <= 35) {
-    // 1M: show every ~3 days + month label
-    const seenMo = new Set();
-    d.forEach((r, i) => {
-      const [y, m, dy] = r.date.split('-'); const key = y + '-' + m;
-      const isMonthStart = !seenMo.has(key);
-      if (isMonthStart) { seenMo.add(key); xLabels.push({ i, lbl: MO_NAMES[+m-1] + " '" + String(y).slice(2), tick: true, bold: true }); }
-      else if (+dy % 5 === 0) { xLabels.push({ i, lbl: +dy, tick: true }); }
-    });
-  } else if (n <= 100) {
-    // 3M: show weekly ticks with month label at month start
-    const seenMo = new Set(), seenWk = new Set();
-    d.forEach((r, i) => {
-      const dt = new Date(r.date), dow = dt.getDay();
-      const [y, m, dy] = r.date.split('-'); const moKey = y + '-' + m;
-      const isMonthStart = !seenMo.has(moKey);
-      if (isMonthStart) { seenMo.add(moKey); xLabels.push({ i, lbl: MO_NAMES[+m-1] + " '" + String(y).slice(2), tick: true, bold: true }); }
-      else if (dow === 1 && !seenWk.has(r.date.slice(0,8) + '01')) { // Monday = week start
-        const wkKey = y + '-' + m + '-w' + Math.ceil(+dy/7);
-        if (!seenWk.has(wkKey)) { seenWk.add(wkKey); xLabels.push({ i, lbl: +dy + '/' + m.replace(/^0/,''), tick: false }); }
-      }
-    });
-  } else if (n <= 200) {
-    // 6M: bi-weekly ticks, month labels prominent
-    const seenMo = new Set();
-    d.forEach((r, i) => {
-      const [y, m, dy] = r.date.split('-'); const key = y + '-' + m;
-      const isMonthStart = !seenMo.has(key);
-      if (isMonthStart) { seenMo.add(key); xLabels.push({ i, lbl: MO_NAMES[+m-1] + " '" + String(y).slice(2), tick: true, bold: true }); }
-      else if (+dy === 15) { xLabels.push({ i, lbl: '15', tick: false }); }
-    });
-  } else {
-    // All / 1Y: monthly labels only
-    const seenMo = new Set();
-    d.forEach((r, i) => {
-      const [y, m] = r.date.split('-'); const key = y + '-' + m;
-      if (!seenMo.has(key)) { seenMo.add(key); xLabels.push({ i, lbl: MO_NAMES[+m-1] + " '" + String(y).slice(2), tick: true, bold: false }); }
-    });
+  const maxLabels = Math.min(12, Math.floor(a.w / 65)); 
+  const step = Math.max(1, Math.floor(n / maxLabels));
+
+  CX.textAlign = 'center';
+  for (let i = 0; i < n; i += step) {
+     const r = d[i];
+     const [y, m, dy] = r.date.split('-');
+     let lbl = '', isBold = false;
+     
+     if (n <= 90) { lbl = `${dy} ${MO_NAMES[+m-1]}`; } 
+     else if (n <= 730) { lbl = `${MO_NAMES[+m-1]} '${y.slice(2)}`; } 
+     else { lbl = y; isBold = true; }
+     
+     CX.fillStyle = isBold ? '#475569' : '#64748B'; 
+     CX.font = isBold ? '700 11px "Inter"' : '600 10px "Inter"';
+     CX.fillText(lbl, tx(i), a.y + a.h + 24);
   }
 
-  xLabels.forEach(({ i, lbl, tick, bold }) => {
-    CX.fillStyle = bold ? '#475569' : '#64748B';
-    CX.font = bold ? '600 11px "Inter"' : '500 10px "Inter"';
-    CX.textAlign = 'center';
-    CX.fillText(lbl, tx(i), a.y + a.h + 20);
-    if (tick) {
-      CX.strokeStyle = bold ? '#94A3B8' : '#CBD5E1';
-      CX.lineWidth = bold ? 1.5 : 1;
-      CX.beginPath(); CX.moveTo(tx(i), a.y + a.h); CX.lineTo(tx(i), a.y + a.h + (bold ? 8 : 4)); CX.stroke();
-      if (bold) {
-        // Draw faint vertical guide line for month start
-        CX.strokeStyle = 'rgba(203,213,225,0.5)'; CX.lineWidth = 1; CX.setLineDash([3,4]);
-        CX.beginPath(); CX.moveTo(tx(i), a.y); CX.lineTo(tx(i), a.y + a.h); CX.stroke();
-        CX.setLineDash([]);
+  // 1. Draw Historical Baseline
+  CX.beginPath();
+  CX.strokeStyle = '#0F172A'; CX.lineWidth = n > 500 ? 1.5 : 2.5; CX.lineJoin = 'round';
+  let lastHistIdx = -1;
+  d.forEach((r, i) => {
+      if (r.is_actual) {
+          if (i === 0) CX.moveTo(tx(i), ty(r.baseline_myr));
+          else CX.lineTo(tx(i), ty(r.baseline_myr));
+          lastHistIdx = i;
       }
-    }
   });
-
-  // Gap Fills (Vertical bars matching the image)
-  d.forEach((r, i) => {
-    if (i % (Math.max(1, Math.floor(n/40))) !== 0) return; // Sampling for aesthetic spacing
-    const x = tx(i), yB = ty(r.baseline_myr), yI = ty(r.interv_myr);
-    CX.fillStyle = r.net_impact >= 0 ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)';
-    const rectW = Math.max(6, a.w / 60);
-    CX.fillRect(x - rectW/2, Math.min(yB, yI), rectW, Math.abs(yI - yB));
-  });
-
-  // Baseline Line (Dashed)
-  CX.setLineDash([6, 6]); CX.strokeStyle = '#94A3B8'; CX.lineWidth = 2; CX.lineJoin = 'round';
-  CX.beginPath(); d.forEach((r, i) => i === 0 ? CX.moveTo(tx(i), ty(r.baseline_myr)) : CX.lineTo(tx(i), ty(r.baseline_myr)));
-  CX.stroke(); CX.setLineDash([]);
-  
-  // Baseline Dots
-  CX.fillStyle = '#FFFFFF'; CX.strokeStyle = '#94A3B8'; CX.lineWidth = 2;
-  d.forEach((r, i) => {
-    if (i % Math.max(1, Math.floor(n/15)) === 0) {
-      CX.beginPath(); CX.arc(tx(i), ty(r.baseline_myr), 4, 0, Math.PI*2); CX.fill(); CX.stroke();
-    }
-  });
-
-  // Intervention Line (Solid Blue)
-  CX.strokeStyle = '#3B82F6'; CX.lineWidth = 3; CX.lineJoin = 'round';
-  CX.beginPath(); d.forEach((r, i) => i === 0 ? CX.moveTo(tx(i), ty(r.interv_myr)) : CX.lineTo(tx(i), ty(r.interv_myr)));
+  if (lastHistIdx !== -1 && lastHistIdx < d.length - 1) {
+      CX.lineTo(tx(lastHistIdx + 1), ty(d[lastHistIdx + 1].baseline_myr));
+  }
   CX.stroke();
-  
-  // Intervention Dots
-  CX.fillStyle = '#FFFFFF'; CX.strokeStyle = '#3B82F6'; CX.lineWidth = 2;
+
+  // 2. Draw Prediction Baseline 
+  CX.beginPath();
+  CX.setLineDash([5, 5]);
+  CX.strokeStyle = '#94A3B8'; CX.lineWidth = 2;
+  let startPred = false;
   d.forEach((r, i) => {
-    if (i % Math.max(1, Math.floor(n/15)) === 0) {
-      CX.beginPath(); CX.arc(tx(i), ty(r.interv_myr), 5, 0, Math.PI*2); CX.fill(); CX.stroke();
-    }
+      if (!r.is_actual) {
+          if (!startPred) {
+              startPred = true;
+              if (i > 0) CX.moveTo(tx(i-1), ty(d[i-1].baseline_myr)); 
+              else CX.moveTo(tx(i), ty(r.baseline_myr));
+          }
+          CX.lineTo(tx(i), ty(r.baseline_myr));
+      }
   });
+  CX.stroke();
+  CX.setLineDash([]);
+
+  // 3. Draw Intervention Fills 
+  d.forEach((r, i) => {
+      if (r.is_actual || i % (Math.max(1, Math.floor(n/40))) !== 0) return;
+      const x = tx(i), yB = ty(r.baseline_myr), yI = ty(r.interv_myr);
+      CX.fillStyle = r.net_impact >= 0 ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)';
+      CX.fillRect(x - 3, Math.min(yB, yI), 6, Math.abs(yI - yB));
+  });
+
+  // 4. Draw Intervention Scenario Line 
+  CX.beginPath();
+  CX.strokeStyle = '#3B82F6'; CX.lineWidth = 3; CX.lineJoin = 'round';
+  startPred = false;
+  d.forEach((r, i) => {
+      if (!r.is_actual) {
+          if (!startPred) {
+              startPred = true;
+              if (i > 0) CX.moveTo(tx(i-1), ty(d[i-1].baseline_myr)); 
+              else CX.moveTo(tx(i), ty(r.interv_myr));
+          }
+          CX.lineTo(tx(i), ty(r.interv_myr));
+      }
+  });
+  CX.stroke();
 
   drawEventMarkers(d, tx, a);
-  CV._d = { d, tx, ty };
+}
+
+// ─────────────────────────────────────────────
+//  DRAW SLIDER (VIRTUAL CLAMP)
+// ─────────────────────────────────────────────
+function drawSlider() {
+  if (!SLIDER_CX || !CALC_DATA.length) return;
+  const w = SLIDER_CV.width, h = SLIDER_CV.height, total = CALC_DATA.length;
+  SLIDER_CX.clearRect(0, 0, w, h);
+  
+  const getX = (i) => (i / (total-1)) * w;
+
+  const allVals = CALC_DATA.map(d => d.interv_myr);
+  const minV = Math.min(...allVals), maxV = Math.max(...allVals), rng = (maxV - minV) || 1;
+  
+  // 1. Sparkline Background (Penuh Ujung ke Ujung)
+  SLIDER_CX.beginPath(); SLIDER_CX.fillStyle = '#E2E8F0'; SLIDER_CX.moveTo(0, h);
+  for(let i=0; i<total; i++) {
+     const x = getX(i);
+     const y = h - ((CALC_DATA[i].interv_myr - minV) / rng) * (h-16) - 8;
+     SLIDER_CX.lineTo(x, y);
+  }
+  SLIDER_CX.lineTo(w, h); SLIDER_CX.fill();
+  
+  // 2. Sparkline Stroke
+  SLIDER_CX.beginPath(); SLIDER_CX.strokeStyle = '#94A3B8'; SLIDER_CX.lineWidth = 1.5;
+  for(let i=0; i<total; i++) {
+     const x = getX(i);
+     const y = h - ((CALC_DATA[i].interv_myr - minV) / rng) * (h-16) - 8;
+     
+     if (!CALC_DATA[i].is_actual && Math.abs(CALC_DATA[i].net_impact) > 10) {
+        SLIDER_CX.stroke(); 
+        SLIDER_CX.beginPath(); 
+        SLIDER_CX.strokeStyle = '#3B82F6';
+        SLIDER_CX.moveTo(x, y);
+     }
+     
+     if (i===0) SLIDER_CX.moveTo(x, y); else SLIDER_CX.lineTo(x, y);
+  }
+  SLIDER_CX.stroke();
+
+  // 3. Marker 'TODAY' 
+  let splitIdx = -1;
+  for (let i = 0; i < total - 1; i++) {
+      if (CALC_DATA[i].is_actual && !CALC_DATA[i+1].is_actual) { splitIdx = i; break; }
+  }
+
+  if (splitIdx !== -1) {
+      const splitX = getX(splitIdx);
+      SLIDER_CX.beginPath();
+      SLIDER_CX.strokeStyle = '#0F172A'; 
+      SLIDER_CX.lineWidth = 1.5;
+      SLIDER_CX.setLineDash([3, 3]);
+      SLIDER_CX.moveTo(splitX, 0); SLIDER_CX.lineTo(splitX, h);
+      SLIDER_CX.stroke();
+      SLIDER_CX.setLineDash([]);
+      
+      SLIDER_CX.fillStyle = '#0F172A';
+      SLIDER_CX.font = '800 9px "Inter"';
+      if (splitX > w * 0.9) { SLIDER_CX.textAlign = 'right'; SLIDER_CX.fillText('TODAY', splitX - 6, 12); } 
+      else if (splitX < w * 0.1) { SLIDER_CX.textAlign = 'left'; SLIDER_CX.fillText('TODAY', splitX + 6, 12); } 
+      else { SLIDER_CX.textAlign = 'center'; SLIDER_CX.fillText('TODAY', splitX, 12); }
+  }
+  
+  const startX = getX(viewStartIdx), endX = getX(viewEndIdx);
+  
+  // 4. Window Overlay Selection
+  SLIDER_CX.fillStyle = 'rgba(248, 250, 252, 0.85)'; 
+  SLIDER_CX.fillRect(0, 0, startX, h); 
+  SLIDER_CX.fillRect(endX, 0, w - endX, h);
+  
+  SLIDER_CX.fillStyle = 'rgba(59, 130, 246, 0.05)';
+  SLIDER_CX.fillRect(startX, 0, endX - startX, h);
+
+  SLIDER_CX.strokeStyle = '#3B82F6'; 
+  SLIDER_CX.lineWidth = 2.5;
+  SLIDER_CX.beginPath();
+  SLIDER_CX.moveTo(startX, 1.25); SLIDER_CX.lineTo(endX, 1.25); 
+  SLIDER_CX.moveTo(startX, h - 1.25); SLIDER_CX.lineTo(endX, h - 1.25); 
+  SLIDER_CX.stroke();
+  
+  // 5. GAMBAR GAGANG (VIRTUAL CLAMP)
+  const hW = 12; 
+  const hH = 20; 
+  
+  const drawStartX = Math.max(hW/2, Math.min(w - hW/2, startX));
+  const drawEndX = Math.max(hW/2, Math.min(w - hW/2, endX));
+
+  SLIDER_CX.fillStyle = '#FFFFFF';
+  SLIDER_CX.strokeStyle = '#3B82F6';
+  SLIDER_CX.lineWidth = 2;
+
+  // Box
+  SLIDER_CX.fillRect(drawStartX - hW/2, h/2 - hH/2, hW, hH);
+  SLIDER_CX.strokeRect(drawStartX - hW/2, h/2 - hH/2, hW, hH);
+  SLIDER_CX.fillRect(drawEndX - hW/2, h/2 - hH/2, hW, hH);
+  SLIDER_CX.strokeRect(drawEndX - hW/2, h/2 - hH/2, hW, hH);
+  
+  // Grip
+  SLIDER_CX.fillStyle = '#3B82F6';
+  SLIDER_CX.fillRect(drawStartX - 2, h/2 - 4, 1.5, 8);
+  SLIDER_CX.fillRect(drawStartX + 1, h/2 - 4, 1.5, 8);
+  SLIDER_CX.fillRect(drawEndX - 2, h/2 - 4, 1.5, 8);
+  SLIDER_CX.fillRect(drawEndX + 1, h/2 - 4, 1.5, 8);
+}
+
+function getPercentile(arr, p) {
+  if (!arr || arr.length === 0) return 0;
+  const sorted = [...arr].sort((a, b) => a - b);
+  const pos = (sorted.length - 1) * (p / 100), base = Math.floor(pos), rest = pos - base;
+  if (sorted[base + 1] !== undefined) return sorted[base] + rest * (sorted[base + 1] - sorted[base]);
+  return sorted[base];
+}
+
+function renderPercentileOverlay(cx, ty, xStart, xEnd, w) {
+  const activePrices = VIS_DATA.map(d => d.baseline_myr);
+  const p10 = getPercentile(activePrices, 10), p25 = getPercentile(activePrices, 25), p50 = getPercentile(activePrices, 50), p75 = getPercentile(activePrices, 75), p90 = getPercentile(activePrices, 90);
+
+  function drawZone(vT, vB, color, label) {
+    const yT = ty(vT), yB = ty(vB); cx.fillStyle = color; cx.fillRect(xStart, yT, w, yB - yT);
+    cx.fillStyle = '#1E293B'; cx.font = '600 10px "Inter"'; cx.textAlign = 'right'; cx.fillText(label, xEnd - 10, yT + 14);
+  }
+  drawZone(p90, p75, 'rgba(239, 68, 68, 0.08)', 'Extreme High (P75-P90)');
+  drawZone(p75, p50, 'rgba(255, 235, 59, 0.08)', 'High Band (P75-P90)');
+  drawZone(p50, p25, 'rgba(16, 185, 129, 0.08)', 'Normal Band (P25-P75)');
+  drawZone(p25, p10, 'rgba(59, 130, 246, 0.08)', 'Low Price Zone (P10-P25)');
+
+  [ {p: p90, lbl: 'P90'}, {p: p75, lbl: 'P75'}, {p: p50, lbl: 'P50 (Median)'}, {p: p25, lbl: 'P25'}, {p: p10, lbl: 'P10'} ].forEach(pt => {
+    const y = ty(pt.p); cx.strokeStyle = '#94A3B8'; cx.setLineDash([4, 4]); cx.lineWidth = 1;
+    cx.beginPath(); cx.moveTo(xStart, y); cx.lineTo(xEnd, y); cx.stroke(); cx.setLineDash([]);
+    cx.fillStyle = '#475569'; cx.font = '700 10px "DM Mono"'; cx.textAlign = 'left'; cx.fillText(`${pt.lbl}: ${Math.round(pt.p).toLocaleString('id-ID')}`, xStart + 8, y - 6);
+  });
 }
 
 function drawEventMarkers(d, tx, a) {
   const svg = document.getElementById('ev-overlay'); svg.innerHTML = '';
   EVENTS.filter(ev => ev.active).forEach(ev => {
     const idx = d.findIndex(r => r.date === ev.start); if (idx === -1) return;
-    const x = tx(idx), color = ev.source === 'supply' ? '#EF4444' : '#10B981'; // Green for demand step, Red for supply pulse
-    
-    // Line
+    const x = tx(idx), color = ev.source === 'supply' ? '#EF4444' : '#10B981';
     const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     line.setAttribute('x1', x); line.setAttribute('y1', a.y - 10); line.setAttribute('x2', x); line.setAttribute('y2', a.y + a.h);
-    line.setAttribute('stroke', color); line.setAttribute('stroke-width', '1.5'); line.setAttribute('stroke-dasharray', '4,4'); line.setAttribute('opacity', '0.6');
+    line.setAttribute('stroke', color); line.setAttribute('stroke-width', '2'); line.setAttribute('stroke-dasharray', '4,4'); line.setAttribute('opacity', '0.7');
     svg.appendChild(line);
 
-    // HTML Label (using foreignObject for better styling)
     const fo = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
-    fo.setAttribute('x', x > a.x + a.w * 0.7 ? x - 160 : x + 8);
-    fo.setAttribute('y', a.y + Math.random() * 40); // slightly stagger Y
-    fo.setAttribute('width', '150'); fo.setAttribute('height', '50');
-    
-    const sign = ev.omega >= 0 ? '+' : '';
-    fo.innerHTML = `
-      <div style="background:#FFF; border:1px solid ${color}; border-radius:4px; padding:6px 8px; font-family:'Inter'; font-size:10px; color:#1E293B; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
-        <strong>${ev.name}</strong><br>
-        <span style="color:${color}; font-family:'DM Mono'; font-size:9px;">${ev.shockType.toUpperCase()} | ${sign}${ev.omega} MYR</span>
-      </div>`;
+    fo.setAttribute('x', x > a.x + a.w * 0.7 ? x - 180 : x + 8); fo.setAttribute('y', a.y + Math.random() * 40); fo.setAttribute('width', '170'); fo.setAttribute('height', '50');
+    fo.innerHTML = `<div style="background:#FFF; border:2px solid ${color}; border-radius:6px; padding:8px 10px; font-family:'Inter'; font-size:11px; color:#0F172A; box-shadow:0 4px 6px rgba(0,0,0,0.1);"><strong>${ev.name}</strong><br><span style="color:${color}; font-family:'DM Mono'; font-size:10px; font-weight: 700;">${ev.shockType.toUpperCase()} | ${ev.omega>=0?'+':''}${ev.omega} MYR</span></div>`;
     svg.appendChild(fo);
   });
 }
 
 function onHover(e) {
   if (!CV._d) return;
-  const r = CV.getBoundingClientRect(), mx = (e.clientX - r.left) * (CV.width / r.width);
-  const { d, tx, ty } = CV._d; let ni = 0, minD = Infinity;
+  const wrap = document.getElementById('chart-wrap');
+  const r = CV.getBoundingClientRect(); 
+  const mx = e.clientX - r.left; 
+  const { d, tx } = CV._d; let ni = 0, minD = Infinity;
   for (let i = 0; i < d.length; i++) { const dist = Math.abs(mx - tx(i)); if (dist < minD) { minD = dist; ni = i; } }
   if (minD > 28) { document.getElementById('tooltip').style.opacity = '0'; return; }
 
-  const row = d[ni], v = row.net_impact, pct = row.baseline_myr > 0 ? (v / row.baseline_myr * 100) : 0;
-  const vc = v >= 0 ? 'var(--green)' : 'var(--red)', [yr, mo, dy] = row.date.split('-');
+  const row = d[ni], [yr, mo, dy] = row.date.split('-');
   const tt = document.getElementById('tooltip');
   
-  tt.innerHTML = `
-    <div class="tt-date">${dy} ${MO_NAMES[+mo-1]} ${yr}</div>
-    <div class="tt-row"><span class="tt-lbl">Baseline BAU</span><span class="tt-val">RM ${row.baseline_myr.toLocaleString('id-ID',{minimumFractionDigits:0,maximumFractionDigits:0})}</span></div>
-    <div class="tt-row"><span class="tt-lbl">With Scenarios</span><span class="tt-val" style="color:var(--blue)">RM ${row.interv_myr.toLocaleString('id-ID',{minimumFractionDigits:0,maximumFractionDigits:0})}</span></div>
-    <div class="tt-sep"></div>
-    <div class="tt-row"><span class="tt-lbl">Gap Impact</span><span class="tt-val" style="color:${vc}">${v>=0?'+':''}${v.toFixed(0)} MYR</span></div>`;
+  if (!row.is_actual) {
+    const v = row.net_impact, vc = v >= 0 ? 'var(--green)' : 'var(--red)';
+    tt.innerHTML = `
+      <div class="tt-date">${dy} ${MO_NAMES[+mo-1]} ${yr} <span style="color:var(--blue);">(Projected)</span></div>
+      <div class="tt-row"><span class="tt-lbl">Baseline BAU</span><span class="tt-val">RM ${row.baseline_myr.toLocaleString('id-ID',{minimumFractionDigits:0,maximumFractionDigits:0})}</span></div>
+      <div class="tt-row"><span class="tt-lbl">With Scenarios</span><span class="tt-val" style="color:var(--blue)">RM ${row.interv_myr.toLocaleString('id-ID',{minimumFractionDigits:0,maximumFractionDigits:0})}</span></div>
+      <div class="tt-sep"></div>
+      <div class="tt-row"><span class="tt-lbl">Gap Impact</span><span class="tt-val" style="color:${vc}">${v>=0?'+':''}${v.toFixed(0)} MYR</span></div>`;
+  } else {
+    tt.innerHTML = `<div class="tt-date">${dy} ${MO_NAMES[+mo-1]} ${yr} <span style="color:var(--muted);">(Historical)</span></div><div class="tt-row"><span class="tt-lbl">Actual Price</span><span class="tt-val">RM ${row.baseline_myr.toLocaleString('id-ID',{minimumFractionDigits:0,maximumFractionDigits:0})}</span></div>`;
+    if (chartViewMode === 'percentile') {
+      const allPrices = VIS_DATA.map(v => v.baseline_myr);
+      const rank = (allPrices.filter(p => p <= row.baseline_myr).length / allPrices.length) * 100;
+      tt.innerHTML += `<div class="tt-sep"></div><div class="tt-row"><span class="tt-lbl">Current Zone Rank</span><span class="tt-val" style="color:var(--amber)">P${Math.round(rank)}</span></div>`;
+    }
+  }
 
-  const cx2 = e.clientX - r.left; tt.style.left = (cx2 > r.width / 2 ? cx2 - 240 : cx2 + 20) + 'px';
-  tt.style.top = Math.max(10, e.clientY - r.top - 70) + 'px'; tt.style.opacity = '1';
+  const cx2 = e.clientX - wrap.getBoundingClientRect().left; 
+  tt.style.left = (cx2 > wrap.clientWidth / 2 ? cx2 - 260 : cx2 + 20) + 'px';
+  tt.style.top = Math.max(10, e.clientY - r.top - 80) + 'px'; tt.style.opacity = '1';
 }
 
 // ─────────────────────────────────────────────
 //  TABLE 
 // ─────────────────────────────────────────────
-function setTblMode(mode, btn) {
-  tblMode = mode; document.querySelectorAll('.t-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); updateTable();
-}
-
+function setTblMode(mode, btn) { tblMode = mode; document.querySelectorAll('.t-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); updateTable(); }
 function updateTable() {
   const d = VIS_DATA; if (!d.length) return;
-  const maxAbsImp = Math.max(...d.map(r => Math.abs(r.net_impact)), 1);
   const fmt = v => 'RM ' + v.toLocaleString('id-ID', {minimumFractionDigits:0, maximumFractionDigits:0});
   let rows = [], hdr = '';
 
+  const groupData = (keyFn) => {
+    const groups = {}; d.forEach(r => { const key = keyFn(r); if (!groups[key]) groups[key] = []; groups[key].push(r); });
+    return Object.entries(groups).sort(([a],[b]) => a < b ? -1 : 1);
+  };
+
   if (tblMode === 'daily') {
-    rows = d.map(r => ({ label: r.date, sub: '', base: r.baseline_myr, interv: r.interv_myr, imp: r.net_impact }));
-    hdr = '<tr><th>Tanggal</th><th>Baseline (MYR)</th><th>Intervensi (MYR)</th><th>Gap Dampak</th><th>Bar</th></tr>';
+    rows = d.map(r => ({ label: r.date, sub: '', base: r.baseline_myr, interv: r.interv_myr, imp: r.net_impact, is_act: r.is_actual }));
+    hdr = `<tr><th>Tanggal</th><th>BAU / Historis</th><th>Skenario</th><th>Gap</th><th>Bar</th></tr>`;
   } else if (tblMode === 'weekly') {
-    const weeks = {};
-    d.forEach(r => {
-      const dt = new Date(r.date), mon = new Date(dt); mon.setDate(dt.getDate() - ((dt.getDay() + 6) % 7));
-      const key = mon.toISOString().slice(0,10); if (!weeks[key]) weeks[key] = []; weeks[key].push(r);
-    });
-    Object.entries(weeks).sort(([a],[b]) => a < b ? -1 : 1).forEach(([wk, rs]) => {
+    groupData(r => { const dt = new Date(r.date); dt.setDate(dt.getDate() - ((dt.getDay() + 6) % 7)); return dt.toISOString().slice(0,10); }).forEach(([wk, rs]) => {
       const [yr,mo,dy] = wk.split('-');
-      rows.push({ label: `W${Math.ceil(+dy/7)} ${MO_NAMES[+mo-1]} ${yr}`, sub: rs.length + ' hari', base: rs.reduce((a,r) => a+r.baseline_myr, 0)/rs.length, interv: rs.reduce((a,r) => a+r.interv_myr, 0)/rs.length, imp: rs.reduce((a,r) => a+r.net_impact, 0)/rs.length });
+      const isAct = rs.every(r => r.is_actual); 
+      rows.push({ label: `W${Math.ceil(+dy/7)} ${MO_NAMES[+mo-1]} ${yr}`, sub: rs.length + ' hari', base: rs.reduce((a,r) => a+r.baseline_myr, 0)/rs.length, interv: rs.reduce((a,r) => a+r.interv_myr, 0)/rs.length, imp: rs.reduce((a,r) => a+r.net_impact, 0)/rs.length, is_act: isAct });
     });
-    hdr = '<tr><th>Minggu</th><th>Hari</th><th>Avg Baseline</th><th>Avg Intervensi</th><th>Avg Gap</th><th>Bar</th></tr>';
+    hdr = `<tr><th>Minggu</th><th>Hari</th><th>Avg BAU/Hist</th><th>Avg Skenario</th><th>Avg Gap</th><th>Bar</th></tr>`;
   } else {
-    const months = {};
-    d.forEach(r => { const key = r.date.slice(0,7); if (!months[key]) months[key] = []; months[key].push(r); });
-    Object.entries(months).sort(([a],[b]) => a < b ? -1 : 1).forEach(([mk, rs]) => {
+    groupData(r => r.date.slice(0,7)).forEach(([mk, rs]) => {
       const [yr,mo] = mk.split('-');
-      rows.push({ label: MO_NAMES[+mo-1] + ' ' + yr, sub: rs.length + ' hari', base: rs.reduce((a,r) => a+r.baseline_myr, 0)/rs.length, interv: rs.reduce((a,r) => a+r.interv_myr, 0)/rs.length, imp: rs.reduce((a,r) => a+r.net_impact, 0)/rs.length });
+      const isAct = rs.every(r => r.is_actual);
+      rows.push({ label: MO_NAMES[+mo-1] + ' ' + yr, sub: rs.length + ' hari', base: rs.reduce((a,r) => a+r.baseline_myr, 0)/rs.length, interv: rs.reduce((a,r) => a+r.interv_myr, 0)/rs.length, imp: rs.reduce((a,r) => a+r.net_impact, 0)/rs.length, is_act: isAct });
     });
-    hdr = '<tr><th>Bulan</th><th>Hari</th><th>Avg Baseline</th><th>Avg Intervensi</th><th>Avg Gap</th><th>Bar</th></tr>';
+    hdr = `<tr><th>Bulan</th><th>Hari</th><th>Avg BAU/Hist</th><th>Avg Skenario</th><th>Avg Gap</th><th>Bar</th></tr>`;
   }
 
   document.getElementById('tbl-head').innerHTML = hdr; let body = '';
   rows.forEach((row, idx) => {
-    const cls = Math.abs(row.imp) < 0.1 ? 'td-neu' : row.imp >= 0 ? 'td-up' : 'td-dn';
-    // Compute delta vs previous period
     let deltaHtml = '<span style="color:var(--subtle)">—</span>';
     if (idx > 0) {
-      const prev = rows[idx - 1];
-      const gapDelta = row.imp - prev.imp;
-      const dSign = gapDelta >= 0 ? '+' : '';
-      const dCls = Math.abs(gapDelta) < 0.1 ? 'td-neu' : gapDelta >= 0 ? 'td-up' : 'td-dn';
+      const prev = rows[idx - 1]; const gapDelta = (!row.is_act) ? row.imp - prev.imp : row.base - prev.base;
+      const dSign = gapDelta >= 0 ? '+' : '', dCls = Math.abs(gapDelta) < 0.1 ? 'td-neu' : gapDelta >= 0 ? 'td-up' : 'td-dn';
       const freqLabel = tblMode === 'daily' ? 'DoD' : tblMode === 'weekly' ? 'WoW' : 'MoM';
       deltaHtml = `<span class="${dCls}" style="font-family:var(--mono);font-size:11px;">${dSign}${gapDelta.toFixed(0)}</span><span style="color:var(--subtle);font-size:10px;margin-left:3px">${freqLabel}</span>`;
     }
-    body += `<tr>
-      <td class="td-label">${row.label}</td>
-      <td class="${tblMode==='daily'?'hidden':'td-sub'}">${row.sub}</td>
-      <td class="td-mono">${fmt(row.base)}</td>
-      <td class="td-mono" style="color:var(--blue)">${fmt(row.interv)}</td>
-      <td class="${cls}">${row.imp>=0?'+':''}${row.imp.toFixed(0)}</td>
-      <td>${deltaHtml}</td>
-    </tr>`;
+    
+    if (!row.is_act) { 
+      const cls = Math.abs(row.imp) < 0.1 ? 'td-neu' : row.imp >= 0 ? 'td-up' : 'td-dn';
+      body += `<tr><td class="td-label">${row.label}</td><td class="${tblMode==='daily'?'hidden':'td-sub'}">${row.sub}</td><td class="td-mono">${fmt(row.base)}</td><td class="td-mono" style="color:var(--blue)">${fmt(row.interv)}</td><td class="${cls}">${row.imp>=0?'+':''}${row.imp.toFixed(0)}</td><td>${deltaHtml}</td></tr>`;
+    } else { 
+      body += `<tr><td class="td-label">${row.label}</td><td class="${tblMode==='daily'?'hidden':'td-sub'}">${row.sub}</td><td class="td-mono">${fmt(row.base)}</td><td class="td-mono td-neu">—</td><td class="td-neu">—</td><td>${deltaHtml}</td></tr>`;
+    }
   });
   document.getElementById('tbl-body').innerHTML = body;
 }
@@ -891,19 +1069,11 @@ function updateTable() {
 //  EVENT MANAGEMENT (IN-PLACE DOM UPDATE)
 // ─────────────────────────────────────────────
 function deltaToHalfLife(delta) { return delta >= 1 ? '∞' : Math.round(Math.log(0.5) / Math.log(delta)) + 'd'; }
-
-function toggleEventCard(id) {
-  const card = document.getElementById('ev-' + id);
-  if (card.classList.contains('open')) { card.classList.remove('open'); OPEN_CARDS.delete(id); }
-  else { card.classList.add('open'); OPEN_CARDS.add(id); }
-}
-
+function toggleEventCard(id) { const card = document.getElementById('ev-' + id); if (card.classList.contains('open')) { card.classList.remove('open'); OPEN_CARDS.delete(id); } else { card.classList.add('open'); OPEN_CARDS.add(id); } }
 function updateCardUI(ev) {
-  const el = id => document.getElementById(id);
-  if (!el(`ev-${ev.id}`)) return;
+  const el = id => document.getElementById(id); if (!el(`ev-${ev.id}`)) return;
   const isBull = (ev.source === 'demand' && ev.omega > 0) || (ev.source === 'supply' && ev.omega < 0);
   const typeColor = isBull ? 'var(--green)' : 'var(--red)', sign = ev.omega >= 0 ? '+' : '';
-  
   if (el(`name-${ev.id}`)) el(`name-${ev.id}`).textContent = ev.name;
   if (el(`met-omega-${ev.id}`)) { el(`met-omega-${ev.id}`).innerHTML = `${sign}${ev.omega} <span style="font-size:9px;color:var(--muted)">MYR</span>`; el(`met-omega-${ev.id}`).style.color = typeColor; }
   if (el(`met-delta-${ev.id}`)) el(`met-delta-${ev.id}`).textContent = ev.delta.toFixed(3);
@@ -911,243 +1081,41 @@ function updateCardUI(ev) {
   if (el(`val-omega-${ev.id}`)) el(`val-omega-${ev.id}`).textContent = `${sign}${ev.omega} MYR`;
   if (el(`val-delta-${ev.id}`)) el(`val-delta-${ev.id}`).textContent = `${ev.delta.toFixed(3)} · HL: ${deltaToHalfLife(ev.delta)}`;
 }
-
 function updateEventField(id, key, value) {
   const ev = EVENTS.find(e => e.id === id); if (!ev) return;
-  if (['omega','delta'].includes(key)) { ev[key] = parseFloat(value); } else { ev[key] = value; }
-  
-  applyEvents(); // Re-calculate model & update chart/KPIs specifically for zoomed area
-  
-  if (['source', 'shockType', 'active'].includes(key)) { renderEventCards(); } 
-  else { updateCardUI(ev); }
+  if (['omega','delta'].includes(key)) ev[key] = parseFloat(value); else ev[key] = value;
+  applyEvents();
+  if (['source', 'shockType', 'active'].includes(key)) renderEventCards(); else updateCardUI(ev);
 }
-
 function addEvent() {
-  const id = Date.now(), firstDate = BASE_DATA.length ? BASE_DATA[Math.floor(BASE_DATA.length * 0.1)].date : '2026-05-01';
+  const id = Date.now();
+  const predData = FULL_DATA.filter(d => !d.is_actual);
+  const firstDate = predData.length ? predData[Math.floor(predData.length * 0.1)].date : '2026-05-01';
   EVENTS.push({ id, name: 'Custom Shock', source: 'demand', shockType: 'step', omega: 100, delta: 0.95, start: firstDate, active: true });
   OPEN_CARDS.add(id); renderEventCards(); applyEvents();
 }
-
 function removeEvent(id) { EVENTS = EVENTS.filter(e => e.id !== id); OPEN_CARDS.delete(id); renderEventCards(); applyEvents(); }
 
 function renderEventCards() {
   const container = document.getElementById('event-list'); container.innerHTML = '';
-  if (!EVENTS.length) { container.innerHTML = `<div style="text-align:center;color:var(--muted);font-size:12px;padding:20px;border:1px dashed var(--bdr-lt);border-radius:var(--r8);">No active scenarios.</div>`; return; }
-  
+  if (!EVENTS.length) { container.innerHTML = `<div style="text-align:center;color:var(--muted);font-size:13px;padding:24px;border:2px dashed var(--bdr-lt);border-radius:var(--r8);">No active scenarios.</div>`; return; }
   EVENTS.forEach(ev => {
-    const isSupply = ev.source === 'supply', srcClass = isSupply ? 'ev-supply supply' : 'ev-demand demand';
-    const typeTxt = isSupply ? 'Supply' : 'Demand', halfLife = deltaToHalfLife(ev.delta);
-    const isBull = (ev.source === 'demand' && ev.omega > 0) || (ev.source === 'supply' && ev.omega < 0);
-    const typeColor = isBull ? 'var(--green)' : 'var(--red)', sign = ev.omega >= 0 ? '+' : '';
-    
-    const card = document.createElement('div');
-    card.className = `ev-card ${srcClass} ${OPEN_CARDS.has(ev.id) ? 'open' : ''}`; card.id = `ev-${ev.id}`;
-    card.innerHTML = `
-      <div class="ev-card-head" onclick="toggleEventCard(${ev.id})">
-        <div class="ev-dot"></div><span class="ev-name" id="name-${ev.id}" title="${ev.name}">${ev.name}</span>
-        <span class="ev-type-badge">${typeTxt}</span><span class="ev-toggle">▾</span>
-      </div>
-      <div class="ev-body">
-        <div class="ev-metrics">
-          <div class="ev-metric"><div class="ev-metric-lbl">Impact</div><div class="ev-metric-val" id="met-omega-${ev.id}" style="color:${typeColor}">${sign}${ev.omega} <span style="font-size:9px;color:var(--muted)">MYR</span></div></div>
-          <div class="ev-metric"><div class="ev-metric-lbl">Decay</div><div class="ev-metric-val" id="met-delta-${ev.id}">${ev.delta.toFixed(3)}</div></div>
-          <div class="ev-metric"><div class="ev-metric-lbl">Half-life</div><div class="ev-metric-val" id="met-hl-${ev.id}">${halfLife}</div></div>
-        </div>
-        <div class="ev-field"><div class="ev-field-label">Scenario Name</div><input class="ev-input" type="text" value="${ev.name}" oninput="updateEventField(${ev.id},'name',this.value)" /></div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-          <div class="ev-field"><div class="ev-field-label">Origin</div><div class="ev-segmented">
-              <button class="seg-btn shock-supply ${ev.source==='supply'?'active':''}" onclick="updateEventField(${ev.id},'source','supply')">Supply</button>
-              <button class="seg-btn shock-demand ${ev.source==='demand'?'active':''}" onclick="updateEventField(${ev.id},'source','demand')">Demand</button>
-          </div></div>
-          <div class="ev-field"><div class="ev-field-label">Shape</div><div class="ev-segmented">
-              <button class="seg-btn pulse-step ${ev.shockType==='step'?'active':''}" onclick="updateEventField(${ev.id},'shockType','step')">Step</button>
-              <button class="seg-btn pulse-step ${ev.shockType==='pulse'?'active':''}" onclick="updateEventField(${ev.id},'shockType','pulse')">Pulse</button>
-          </div></div>
-        </div>
-        <div class="ev-field"><div class="ev-slider-meta"><div class="ev-field-label">ω — Shock Magnitude</div><div class="ev-slider-val" id="val-omega-${ev.id}">${sign}${ev.omega} MYR</div></div>
-          <input type="range" min="-1000" max="1000" step="5" value="${ev.omega}" oninput="updateEventField(${ev.id},'omega',this.value)" />
-        </div>
-        <div class="ev-field"><div class="ev-slider-meta"><div class="ev-field-label">δ — Persistence Rate</div><div class="ev-slider-val" id="val-delta-${ev.id}">${ev.delta.toFixed(3)} · HL: ${halfLife}</div></div>
-          <input type="range" min="0.80" max="0.999" step="0.001" value="${ev.delta}" oninput="updateEventField(${ev.id},'delta',this.value)" />
-        </div>
-        <div class="ev-field"><div class="ev-field-label">Start Date</div><input class="ev-input" type="date" value="${ev.start}" onchange="updateEventField(${ev.id},'start',this.value)" /></div>
-        <div style="display:flex;gap:6px;align-items:center; margin-top:4px;">
-          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;flex:1;font-size:11px; font-weight:500; color:var(--text-main)">
-            <input type="checkbox" ${ev.active?'checked':''} style="accent-color:var(--blue);width:16px;height:16px" onchange="updateEventField(${ev.id},'active',this.checked)" /> Aktifkan
-          </label>
-          <button class="btn-del-ev" onclick="removeEvent(${ev.id})">Hapus</button>
-        </div>
-      </div>`;
+    const isSupply = ev.source === 'supply', srcClass = isSupply ? 'ev-supply supply' : 'ev-demand demand', typeTxt = isSupply ? 'Supply' : 'Demand', halfLife = deltaToHalfLife(ev.delta), isBull = (ev.source === 'demand' && ev.omega > 0) || (ev.source === 'supply' && ev.omega < 0), typeColor = isBull ? 'var(--green)' : 'var(--red)', sign = ev.omega >= 0 ? '+' : '';
+    const card = document.createElement('div'); card.className = `ev-card ${srcClass} ${OPEN_CARDS.has(ev.id) ? 'open' : ''}`; card.id = `ev-${ev.id}`;
+    card.innerHTML = `<div class="ev-card-head" onclick="toggleEventCard(${ev.id})"><div class="ev-dot"></div><span class="ev-name" id="name-${ev.id}" title="${ev.name}">${ev.name}</span><span class="ev-type-badge">${typeTxt}</span><span class="ev-toggle">▾</span></div><div class="ev-body"><div class="ev-metrics"><div class="ev-metric"><div class="ev-metric-lbl">Impact</div><div class="ev-metric-val" id="met-omega-${ev.id}" style="color:${typeColor}">${sign}${ev.omega} <span style="font-size:9px;color:var(--muted)">MYR</span></div></div><div class="ev-metric"><div class="ev-metric-lbl">Decay</div><div class="ev-metric-val" id="met-delta-${ev.id}">${ev.delta.toFixed(3)}</div></div><div class="ev-metric"><div class="ev-metric-lbl">Half-life</div><div class="ev-metric-val" id="met-hl-${ev.id}">${halfLife}</div></div></div><div class="ev-field"><div class=\"ev-field-label\">Scenario Name</div><input class=\"ev-input\" type=\"text\" value=\"${ev.name}\" oninput=\"updateEventField(${ev.id},'name',this.value)\" /></div><div style=\"display:grid; grid-template-columns:1fr 1fr; gap:8px;\"><div class=\"ev-field\"><div class=\"ev-field-label\">Origin</div><div class=\"ev-segmented\"><button class=\"seg-btn shock-supply ${ev.source==='supply'?'active':''}\" onclick=\"updateEventField(${ev.id},'source','supply')\">Supply</button><button class=\"seg-btn shock-demand ${ev.source==='demand'?'active':''}\" onclick=\"updateEventField(${ev.id},'source','demand')\">Demand</button></div></div><div class=\"ev-field\"><div class=\"ev-field-label\">Shape</div><div class=\"ev-segmented\"><button class=\"seg-btn pulse-step ${ev.shockType==='step'?'active':''}\" onclick=\"updateEventField(${ev.id},'shockType','step')\">Step</button><button class=\"seg-btn pulse-step ${ev.shockType==='pulse'?'active':''}\" onclick=\"updateEventField(${ev.id},'shockType','pulse')\">Pulse</button></div></div></div><div class=\"ev-field\"><div class=\"ev-slider-meta\"><div class=\"ev-field-label\">ω — Shock Magnitude</div><div class=\"ev-slider-val\" id=\"val-omega-${ev.id}\">${sign}${ev.omega} MYR</div></div><input type=\"range\" min=\"-1000\" max=\"1000\" step=\"5\" value=\"${ev.omega}\" oninput=\"updateEventField(${ev.id},'omega',this.value)\" /></div><div class=\"ev-field\"><div class=\"ev-slider-meta\"><div class=\"ev-field-label\">δ — Persistence Rate</div><div class=\"ev-slider-val\" id=\"val-delta-${ev.id}\">${ev.delta.toFixed(3)} · HL: ${halfLife}</div></div><input type=\"range\" min=\"0.80\" max=\"0.999\" step=\"0.001\" value=\"${ev.delta}\" oninput=\"updateEventField(${ev.id},'delta',this.value)\" /></div><div class=\"ev-field\"><div class=\"ev-field-label\">Start Date</div><input class=\"ev-input\" type=\"date\" value=\"${ev.start}\" onchange=\"updateEventField(${ev.id},'start',this.value)\" /></div><div style=\"display:flex;gap:6px;align-items:center; margin-top:4px;\"><label style=\"display:flex;align-items:center;gap:6px;cursor:pointer;flex:1;font-size:12px; font-weight:600; color:var(--text-main)\"><input type=\"checkbox\" ${ev.active?'checked':''} style=\"accent-color:var(--blue);width:16px;height:16px\" onchange=\"updateEventField(${ev.id},'active',this.checked)\" /> Aktifkan</label><button class=\"btn-del-ev\" onclick=\"removeEvent(${ev.id})\">Hapus</button></div></div>`;
     container.appendChild(card);
   });
 }
 
 function boot() { 
-  initChart(); // <--- Ini yang sebelumnya menyebabkan chart gagal tampil
-  setTerm('short'); 
-  applyEvents(); 
+  initChart(); 
+  applyEvents();
   renderEventCards(); 
-  refreshVis(); 
+  setViewZoom(3); 
 }
 
 document.addEventListener('DOMContentLoaded', loadData);
 window.addEventListener('visibilitychange', () => { if (!document.hidden) drawChart(); });
-</script>
-<script>
-// ─────────────────────────────────────────────
-//  EXTENSION: PERCENTILE VIEW MODULE (FIXED)
-// ─────────────────────────────────────────────
-
-// Global state untuk mode view
-let chartViewMode = 'price';
-
-// Toggle Functionality
-function toggleChartView(mode) {
-  chartViewMode = mode;
-  document.getElementById('btn-view-price').classList.toggle('active', mode === 'price');
-  document.getElementById('btn-view-percentile').classList.toggle('active', mode === 'percentile');
-  
-  // Trigger redraw menggunakan fungsi drawChart bawaan
-  if (typeof drawChart === 'function') {
-    drawChart();
-  }
-}
-
-// Math Utility: Menghitung Percentile secara dinamis
-function getPercentile(arr, p) {
-  if (!arr || arr.length === 0) return 0;
-  const sorted = [...arr].sort((a, b) => a - b);
-  const pos = (sorted.length - 1) * (p / 100);
-  const base = Math.floor(pos);
-  const rest = pos - base;
-  if (sorted[base + 1] !== undefined) {
-    return sorted[base] + rest * (sorted[base + 1] - sorted[base]);
-  }
-  return sorted[base];
-}
-
-// ─────────────────────────────────────────────
-//  PROXY OVERRIDES (Non-Destructive Hooks)
-// ─────────────────────────────────────────────
-
-// 1. Hook ke drawChart agar tidak merusak fungsi asli
-const _originalDrawChart = drawChart;
-drawChart = function() {
-  // Jalankan render chart asli terlebih dahulu
-  _originalDrawChart();
-
-  // Jika mode percentile aktif, dan Canvas Data (_d) sudah terbentuk, gambar overlay
-  if (chartViewMode === 'percentile' && typeof CV !== 'undefined' && CV._d) {
-    renderPercentileOverlay();
-  }
-};
-
-// 2. Hook ke onHover untuk menambahkan data Percentile Rank ke Tooltip asli
-const _originalOnHover = onHover;
-onHover = function(e) {
-  // Jalankan hover asli terlebih dahulu
-  _originalOnHover(e);
-
-  const tt = document.getElementById('tooltip');
-  if (tt.style.opacity !== '0' && chartViewMode === 'percentile') {
-    const r = CV.getBoundingClientRect();
-    const mx = (e.clientX - r.left) * (CV.width / r.width);
-    const { d, tx } = CV._d;
-    
-    let ni = 0, minD = Infinity;
-    for (let i = 0; i < d.length; i++) {
-      const dist = Math.abs(mx - tx(i));
-      if (dist < minD) { minD = dist; ni = i; }
-    }
-    
-    const row = d[ni];
-    // Kumpulkan semua harga yang terlihat di layar untuk menghitung ranking aktual
-    const allVisiblePrices = VIS_DATA.flatMap(v => [v.baseline_myr, v.interv_myr]);
-    const rank = (allVisiblePrices.filter(p => p <= row.interv_myr).length / allVisiblePrices.length) * 100;
-    
-    // Tambahkan baris baru di tooltip secara mulus
-    tt.innerHTML += `
-      <div class="tt-sep"></div>
-      <div class="tt-row">
-        <span class="tt-lbl">Current Zone Rank</span>
-        <span class="tt-val" style="color:var(--amber)">P${Math.round(rank)}</span>
-      </div>`;
-  }
-};
-
-// ─────────────────────────────────────────────
-//  CANVAS RENDERER (SHADES & LINES)
-// ─────────────────────────────────────────────
-function renderPercentileOverlay() {
-  const cx = CX; // Menggunakan Context (CX) bawaan dari script asli
-  const { ty } = CV._d; // Menggunakan fungsi mapping Y-Axis bawaan asli
-  
-  // Dimensi padding sama dengan konstanta 'P' di script asli (l:82, r:24)
-  const paddingL = 82;
-  const paddingR = 24;
-  const w = CV.width - paddingL - paddingR;
-  const xStart = paddingL;
-  const xEnd = CV.width - paddingR;
-
-  // Tarik data harga yang sedang tampil di layar saat ini (sesuai efek zoom)
-  const activePrices = VIS_DATA.flatMap(d => [d.baseline_myr, d.interv_myr]);
-  
-  const p10 = getPercentile(activePrices, 10);
-  const p25 = getPercentile(activePrices, 25);
-  const p50 = getPercentile(activePrices, 50);
-  const p75 = getPercentile(activePrices, 75);
-  const p90 = getPercentile(activePrices, 90);
-
-  // Helper untuk menggambar area arsiran transparan (Zone)
-  function drawZone(valTop, valBot, color, label) {
-    const yTop = ty(valTop);
-    const yBot = ty(valBot);
-    
-    cx.fillStyle = color;
-    cx.fillRect(xStart, yTop, w, yBot - yTop);
-
-    // Label Zone diletakkan di sisi kanan
-    cx.fillStyle = '#1E293B';
-    cx.font = '600 10px "Inter"';
-    cx.textAlign = 'right';
-    cx.fillText(label, xEnd - 10, yTop + 14);
-  }
-
-  // 1. Gambar Area Background (Zones)
-  drawZone(p90, p75, 'rgba(239, 68, 68, 0.08)', 'Extreme High (P75-P90)');
-  drawZone(p75, p50, 'rgba(255, 235, 59, 0.08)', 'High Band (P75-P90)');
-  drawZone(p50, p25, 'rgba(16, 185, 129, 0.08)', 'Normal Band (P25-P75)');
-  drawZone(p25, p10, 'rgba(59, 130, 246, 0.08)', 'Low Price Zone (P10-P25)');
-
-  // 2. Gambar Garis Percentile (Lines)
-  const lines = [
-    { p: p90, lbl: 'P90' },
-    { p: p75, lbl: 'P75' },
-    { p: p50, lbl: 'P50 (Median)' },
-    { p: p25, lbl: 'P25' },
-    { p: p10, lbl: 'P10' }
-  ];
-
-  lines.forEach(pt => {
-    const y = ty(pt.p);
-    
-    // Garis putus-putus
-    cx.strokeStyle = '#94A3B8';
-    cx.setLineDash([4, 4]);
-    cx.lineWidth = 1;
-    cx.beginPath(); 
-    cx.moveTo(xStart, y); 
-    cx.lineTo(xEnd, y); 
-    cx.stroke();
-    cx.setLineDash([]);
-
-    // Label Garis diletakkan di sisi kiri
-    cx.fillStyle = '#475569';
-    cx.font = '700 10px "DM Mono"';
-    cx.textAlign = 'left';
-    cx.fillText(`${pt.lbl}: ${Math.round(pt.p).toLocaleString('id-ID')}`, xStart + 8, y - 6);
-  });
-}
 </script>
 </body>
 </html>
